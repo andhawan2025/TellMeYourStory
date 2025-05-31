@@ -1,9 +1,11 @@
+import argparse
+
 import generateScreenplay
 import processScreenplay
 import generateScenesImages
 
 screenplay_file_path = "./outputs/screenplay.txt"
-together_api_key = "41ce1e47f876d36ac945aca87fd86e35b2252e70386ed9b991f2a1f1b2a9d19d"
+together_api_key = ""
 
 
 story_prompt_1 = """
@@ -130,4 +132,10 @@ def main():
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-k", "--api_key", type=str, default=None)
+    args = parser.parse_args()
+
+    together_api_key = args.api_key
+   
     main()
