@@ -87,7 +87,7 @@ screenplay_prompt = """
 
 def main():
     print ("Generating the screenplay for the story prompt")
-    screenplay = generateScreenplay.generate_screenplay(story_prompt_4, screenplay_prompt, together_api_key)
+    screenplay = generateScreenplay.generate_screenplay(story_prompt_1, screenplay_prompt, together_api_key)
     print ("Screenplay received successfully")
     print (screenplay[45:100], "\n\n")
     
@@ -126,8 +126,10 @@ def main():
     for prompt in prompts:
         print ("Generating the image for the scene", i)
         images.append (generateScenesImages.generate_scene_image(prompt))
-        print ("Image generated successfully") 
-        print (images[i])
+        print ("Image for scene", i, "generated successfully")
+        print ("Downloading the image for scene", i)
+        generateScenesImages.download_scene_image(images[i])
+        print ("Image for scene", i, "downloaded successfully")
         i += 1
 
 

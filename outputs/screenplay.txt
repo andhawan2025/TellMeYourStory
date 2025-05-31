@@ -1,41 +1,45 @@
 {
-    "title": "The Gym and the Pool",
-    "characters": ["Guy 1", "Guy 2"],
+    "title": "The Rushed Lady and the Salsa Mom",
+    "characters": ["The Lady", "The Bus Driver", "The Kid", "The Kid's Mom"],
     "scenes": [
         {
             "scene_number": 1,
-            "scene_characters": ["Guy 1", "Guy 2"],
-            "scene_setting": "A gym, with two guys working out",
+            "scene_characters": ["The Lady", "The Bus Driver"],
+            "scene_setting": "A busy street with a bus stop, a bus approaching, and a kid playing nearby",
             "dialogue": [
                 {
-                    "character_name": "Guy 1",
-                    "dialog": "I'm tired."
+                    "character_name": "The Lady",
+                    "dialog": "Oh no, I'm going to be late!"
                 },
                 {
-                    "character_name": "Guy 2",
-                    "dialog": "I'm hungry."
+                    "character_name": "The Bus Driver",
+                    "dialog": "Screech!"
                 }
             ]
         },
         {
             "scene_number": 2,
-            "scene_characters": ["Guy 1"],
-            "scene_setting": "A swimming pool, with Guy 1",
+            "scene_characters": ["The Kid", "The Kid's Mom"],
+            "scene_setting": "The same busy street, with the kid and his mom nearby",
             "dialogue": [
                 {
-                    "character_name": "Guy 1",
-                    "dialog": "I feel better now."
+                    "character_name": "The Kid",
+                    "dialog": "Waaah!"
+                },
+                {
+                    "character_name": "The Kid's Mom",
+                    "dialog": "How could you do this to my child?!"
                 }
             ]
         },
         {
             "scene_number": 3,
-            "scene_characters": ["Guy 2"],
-            "scene_setting": "A cafe, with Guy 2",
+            "scene_characters": ["The Kid's Mom"],
+            "scene_setting": "The same busy street, with the kid's mom standing alone",
             "dialogue": [
                 {
-                    "character_name": "Guy 2",
-                    "dialog": "This banana shake is very refreshing."
+                    "character_name": "The Kid's Mom",
+                    "dialog": "Shhh, shhh, shhh... (starts dancing salsa)"
                 }
             ]
         }
