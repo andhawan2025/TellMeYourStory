@@ -1,0 +1,4 @@
+Create the landing page for a website that takes user ideas and converts them to videos. The website is called "Tell Me Your Story"
+The user will have a text area where they can add their ideas or stories. The text area should allow them to enter no more than 30 sentences.
+Once the user submits their story, the website identifies all characters in the story and asks the user if they would like to upload avatars (images) for each character and give a quick character sketch for the avatar. The character sketch should be a drop down list of adjectives. Provide at least 20 adjectives. The user can submit the avatars or choose to skip them.
+Next, the website should display the generated video to the user.
