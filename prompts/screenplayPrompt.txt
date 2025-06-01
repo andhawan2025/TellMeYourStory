@@ -1,0 +1,50 @@
+Take the story provided below and generate a screenplay for it. The output should be a JSON object only. The screenplay should be in the format of a play.
+Follow the instructions below for generating the screenplay. Every scene must have at least one character and at least one dialogue.
+
+The output should be in the following JSON format:
+{
+        "title": "Title of the play",
+        "characters": ["Character 1", "Character 2", "Character 3"],
+        "scenes": [
+            {
+                "scene_number": 1,
+                "scene_characters": ["Character 1", "Character 2"]
+                "scene_setting": "Description of the scene setting with details like where the scene is taking place, who is present, what time of the day it is etc.",
+                "dialogue": [
+                    {
+                        "character_name": "name of the character speaking the dialog",
+                        "dialog": "what the character says"
+                    }
+                    {
+                        "character_name": "name of the character speaking the dialog",
+                        "dialog": "what the character says"
+                    }
+                    {
+                        "character_name": "name of the character speaking the dialog",
+                        "dialog": "what the character says"
+                    }
+            }
+            {
+                "scene_number": 2,
+                "scene_characters": ["Character 1", "Character 2"]
+                "scene_setting": "Description of the scene setting with details like where the scene is taking place, who is present, what time of the day it is etc.",
+                "dialogue": [
+                    {
+                        "character_name": "name of the character speaking the dialog",
+                        "dialog": "what the character says"
+                    }
+                    {
+                        "character_name": "name of the character speaking the dialog",
+                        "dialog": "what the character says"
+                    }
+                    {
+                        "character_name": "name of the character speaking the dialog",
+                        "dialog": "what the character says"
+                    }
+            }
+        ]
+        Do not include any other text in the output. It should only be a valid JSON object. No other text should be present in the output.
+
+
+    """
+    

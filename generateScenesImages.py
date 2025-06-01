@@ -24,10 +24,10 @@ def generate_scene_image(scene_prompt):
     return result
 
 def download_scene_image (image_url):
-    safe_str = image_url.replace("\\", "\\\\")
-    my_tuple = ast.literal_eval(safe_str)
-    file_path = my_tuple[0]
-    number = my_tuple[1]
+    #safe_str = image_url.replace("\\", "\\\\")
+    #my_tuple = ast.literal_eval(safe_str)
+    file_path = image_url[0]
+    number = image_url[1]
         
     file_url_to_path (file_path)
     os.makedirs(local_outputs_dir, exist_ok=True)

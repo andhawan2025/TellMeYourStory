@@ -1,0 +1,22 @@
+{
+    "stories": [
+      {
+        "story_id": "1",
+        "story_prompt": "A lady is walking towards a bus stop and is running late. She sees the bus approaching and starts running. Seeing her run, the bus driver applies brakes and the bus makes a screeching noise. A kid nearby gets scared of the screeching noise and starts to cry. The kids mother gets extremely angry because of this. She starts doing salsa dance to relieve her of her stress."
+      },
+      {
+        "story_id": "2",
+        "story_prompt": "A chef is cooking food in a busy kitchen. The owner of the restaurant walk in. He is in a good mood. The owner says that he is giving everyone a 50% bonus on tips that day. Everyone becomes happy. They start clapping. The chef also starts singing an opera song."
+      },
+      {
+        "story_id": "3",
+        "story_prompt": "A cat and dog are going to the market. Then the cat buys a banana. The dog buys a blueberry muffin. They both thank the shopkeper. Then they head back home."
+      },
+      {
+        "story_id": "4",
+        "story_prompt": "There are two guys working out in the gym. First one says he's tired. The second one says he is hungry. The first guy goes to the swimming pool to cool off and says he feels better now. The second guy orders a banana shake and says it is very refreshing."
+      }
+    ]
+  }
+
+

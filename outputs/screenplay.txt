@@ -1,6 +1,6 @@
 {
     "title": "The Rushed Lady and the Salsa Mom",
-    "characters": ["The Lady", "The Bus Driver", "The Kid", "The Kid's Mom"],
+    "characters": ["The Lady", "The Bus Driver", "The Kid", "The Salsa Mom"],
     "scenes": [
         {
             "scene_number": 1,
@@ -19,27 +19,27 @@
         },
         {
             "scene_number": 2,
-            "scene_characters": ["The Kid", "The Kid's Mom"],
-            "scene_setting": "The same busy street, with the kid and his mom nearby",
+            "scene_characters": ["The Kid", "The Salsa Mom"],
+            "scene_setting": "The same busy street, with the kid crying and the salsa mom standing nearby",
             "dialogue": [
                 {
                     "character_name": "The Kid",
                     "dialog": "Waaah!"
                 },
                 {
-                    "character_name": "The Kid's Mom",
-                    "dialog": "How could you do this to my child?!"
+                    "character_name": "The Salsa Mom",
+                    "dialog": "Ay, caramba! This noise is driving me loco!"
                 }
             ]
         },
         {
             "scene_number": 3,
-            "scene_characters": ["The Kid's Mom"],
-            "scene_setting": "The same busy street, with the kid's mom standing alone",
+            "scene_characters": ["The Salsa Mom"],
+            "scene_setting": "The same busy street, with the salsa mom dancing in the middle of the street",
             "dialogue": [
                 {
-                    "character_name": "The Kid's Mom",
-                    "dialog": "Shhh, shhh, shhh... (starts dancing salsa)"
+                    "character_name": "The Salsa Mom",
+                    "dialog": "�Viva la salsa! �Viva la vida!"
                 }
             ]
         }
