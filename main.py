@@ -13,44 +13,37 @@ RUNWAY_API_URL = "https://api.runwayml.com/v1/generate"
 
 
 def main():
-    #print ("Generating the screenplay for the story prompt", args.story_number)
-    #story_prompt = getPrompts.get_story_prompt(args.story_number)
-    #screenplay_prompt = getPrompts.get_screenplay_prompt()
-    #screenplay = generateScreenplay.generate_screenplay(story_prompt, screenplay_prompt, together_api_key)
+    print ("Generating the screenplay for story", args.story_number)
+    story_prompt = getPrompts.get_story_prompt(args.story_number)
+    screenplay_prompt = getPrompts.get_screenplay_prompt()
+    screenplay = generateScreenplay.generate_screenplay(story_prompt, screenplay_prompt, together_api_key)
     
     #Ensure any leading text in LLM response is removed.
-    #screenplay_json_string = str(screenplay)
-    #start_index = screenplay_json_string.find('{')
+    screenplay_json_string = str(screenplay)
+    start_index = screenplay_json_string.find('{')
+    if start_index != -1:
+        substring = screenplay_json_string[start_index:]
+    else:
+        substring = screenplay_json_string
 
-    #if start_index != -1:
-    #    substring = screenplay_json_string[start_index:]
-    #else:
-    #    substring = screenplay_json_string
-
-    #substring = screenplay_json_string
-
-    
+    print(substring)    
     #print ("Storing the screenplay in a file")
-    #with open(screenplay_file_path, "w") as f:
-    #    f.write(substring)
-    #print ("Screenplay stored in a file successfully\n\n")
+    with open(screenplay_file_path, "w") as f:
+        f.write(substring)
+    print ("Screenplay stored successfully\n\n")
 
     print ("Generating the scenes for the screenplay")
     scenes = processScreenplay.get_scenes_from_screenplay(screenplay_file_path)
-    print ("Scenes generated successfully")
-    print(len(scenes))
+    print (len(scenes), " scenes generated successfully")
     
-    #i = 0
-    #prompts = []
-    #print ("Generating prompts")
-    
-    #for scene in scenes:
-    #    print ("Generating prompt for scene", i )
-    #    prompts.append (processScreenplay.create_scene_prompt(scene))
-    #    print (prompts[i], "\n\n")
-    #    i += 1
-
-    #print (prompts[2])
+    print ("Generating prompts")
+    i = 0
+    prompts = []
+    for scene in scenes:
+        prompts.append (processScreenplay.create_scene_prompt(scene))
+        print (prompts[i], "\n\n")
+        i += 1
+    print ("Prompts generated successfully")
 
     #i = 0
     #images = []

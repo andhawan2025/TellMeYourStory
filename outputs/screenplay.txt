@@ -1,45 +1,45 @@
 {
-    "title": "The Rushed Lady and the Salsa Mom",
-    "characters": ["The Lady", "The Bus Driver", "The Kid", "The Salsa Mom"],
+    "title": "The Rush Hour",
+    "characters": ["Lady", "Bus Driver", "Kid", "Kid's Mother"],
     "scenes": [
         {
             "scene_number": 1,
-            "scene_characters": ["The Lady", "The Bus Driver"],
-            "scene_setting": "A busy street with a bus stop, a bus approaching, and a kid playing nearby",
+            "scene_characters": ["Lady", "Bus Driver"],
+            "scene_setting": "A busy street with a bus stop, a bus approaching, and a kid playing nearby.",
             "dialogue": [
                 {
-                    "character_name": "The Lady",
-                    "dialog": "Oh no, I'm going to be late!"
+                    "character_name": "Lady",
+                    "dialog": "Oh no, I'm running late!"
                 },
                 {
-                    "character_name": "The Bus Driver",
+                    "character_name": "Bus Driver",
                     "dialog": "Screech!"
                 }
             ]
         },
         {
             "scene_number": 2,
-            "scene_characters": ["The Kid", "The Salsa Mom"],
-            "scene_setting": "The same busy street, with the kid crying and the salsa mom standing nearby",
+            "scene_characters": ["Kid", "Kid's Mother"],
+            "scene_setting": "The same busy street, with the kid and his mother nearby.",
             "dialogue": [
                 {
-                    "character_name": "The Kid",
+                    "character_name": "Kid",
                     "dialog": "Waaah!"
                 },
                 {
-                    "character_name": "The Salsa Mom",
-                    "dialog": "Ay, caramba! This noise is driving me loco!"
+                    "character_name": "Kid's Mother",
+                    "dialog": "How could you do this to my child?!"
                 }
             ]
         },
         {
             "scene_number": 3,
-            "scene_characters": ["The Salsa Mom"],
-            "scene_setting": "The same busy street, with the salsa mom dancing in the middle of the street",
+            "scene_characters": ["Kid's Mother"],
+            "scene_setting": "The same busy street, with the kid's mother standing alone.",
             "dialogue": [
                 {
-                    "character_name": "The Salsa Mom",
-                    "dialog": "�Viva la salsa! �Viva la vida!"
+                    "character_name": "Kid's Mother",
+                    "dialog": "Hmmm, salsa... (starts dancing)"
                 }
             ]
         }
