@@ -11,7 +11,6 @@ together_api_key = ""
 runway_api_key = ""
 RUNWAY_API_URL = "https://api.runwayml.com/v1/generate"
 
-
 def main():
     print ("Generating the screenplay for story", args.story_number)
     story_prompt = getPrompts.get_story_prompt(args.story_number)
@@ -26,37 +25,33 @@ def main():
     else:
         substring = screenplay_json_string
 
-    print(substring)    
-    #print ("Storing the screenplay in a file")
     with open(screenplay_file_path, "w") as f:
         f.write(substring)
-    print ("Screenplay stored successfully\n\n")
+    print ("Screenplay stored successfully")
 
     print ("Generating the scenes for the screenplay")
     scenes = processScreenplay.get_scenes_from_screenplay(screenplay_file_path)
-    print (len(scenes), " scenes generated successfully")
+    print (len(scenes), "scenes generated successfully")
     
     print ("Generating prompts")
     i = 0
     prompts = []
     for scene in scenes:
         prompts.append (processScreenplay.create_scene_prompt(scene))
-        print (prompts[i], "\n\n")
         i += 1
     print ("Prompts generated successfully")
-
-    #i = 0
-    #images = []
     
-    #for prompt in prompts:
-        #print ("Generating the image for the scene", i)
-        #images.append (generateScenesImages.generate_scene_image(prompt))
-        #print (images[i])
-        #print ("Image for scene", i, "generated successfully")
-        #print ("Downloading the image for scene", i)
-        #generateScenesImages.download_scene_image(images[i])
-        #print ("Image for scene", i, "downloaded successfully")
-        #i += 1
+    print ("Generating the images for the scenes")
+    i = 0
+    images = []
+    image_paths = []
+    for prompt in prompts:
+        images.append (generateScenesImages.generate_scene_image(prompt))
+        image_paths.append(generateScenesImages.download_scene_image(images[i], i))
+        i += 1
+    print ("Images generated and downloaded successfully.")
+
+
 
 
 if __name__ == "__main__":

@@ -23,19 +23,18 @@ def generate_scene_image(scene_prompt):
 
     return result
 
-def download_scene_image (image_url):
-    #safe_str = image_url.replace("\\", "\\\\")
-    #my_tuple = ast.literal_eval(safe_str)
+def download_scene_image (image_url, image_number):
     file_path = image_url[0]
-    number = image_url[1]
-        
+          
     file_url_to_path (file_path)
     os.makedirs(local_outputs_dir, exist_ok=True)
 
     src_path = file_url_to_path(file_path)
-    dst_path = os.path.join(local_outputs_dir, os.path.basename(src_path))
+    dst_path1 = os.path.join(local_outputs_dir, os.path.basename(src_path))
+    dst_path = dst_path1[:-5] + str(image_number) + dst_path1[-5:]
     shutil.copy(src_path, dst_path)
-    print(f"Copied to {dst_path}")
+
+    return dst_path
 
 
 def file_url_to_path(file_url):
