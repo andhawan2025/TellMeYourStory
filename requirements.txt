@@ -1,0 +1,16 @@
+gradio_client
+os
+shutil
+openai
+requests
+urllib.parse
+warnings
+time
+json
+argparse
+generateScreenplay
+processScreenplay
+generateScenesImages
+getPrompts
+generateVideoLeonardo
+playVideos
