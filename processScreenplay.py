@@ -51,9 +51,9 @@ def create_scene_prompt(scene):
     dialogues = scene.get("dialogue", [])
 
     prompt = (
-        f"Generate an image for a scene that is described next. "
-        f"The imgage should be a single image that captures the entire scene. "
-        f"The dialogues should be included in the image. "
+        f"Generate an image for a scene that is described next. Proivde a high-resolution, hyperrealistic, highly detailed image, with cinematic lighting, ultra-sharp focus and 8K resolution."
+        f"The imgage should be a single image that captures the entire scene. The image should fit in a 1024x1024 canvas. "
+        f"The dialogues that are present in the scene should be included in the image. "
         f"There are {len(scene_characters)} characters in the scene, as follows: {characters}. "
         f"Scene setting: {setting}. "
     )
@@ -65,3 +65,33 @@ def create_scene_prompt(scene):
         prompt += new_str
     
     return prompt    
+
+def create_video_prompt(scene):
+    """
+    Given a scene JSON object, create a prompt to generate a video prompt to go along with the image for video generation.
+
+    Args:
+    scene (dict): A dictionary with keys 'scene_number', 'scene_characters', 'scene_setting', 'dialogue'.
+
+    Returns:
+    str: Formatted prompt string.
+    """
+    scene_characters = scene.get("scene_characters", [])
+    characters = ", ".join(scene.get("scene_characters", []))
+    setting = scene.get("scene_setting", "No setting description provided.")
+    dialogues = scene.get("dialogue", [])
+
+    prompt = (
+        f"Generate a video for a scene that is described next and presented in the image alongwith the dialogues. "
+        f"The dialogues should appear as callouts in the video. "
+        f"There are {len(scene_characters)} characters in the scene, as follows: {characters}. "
+        f"Scene setting: {setting}. "
+    )
+    
+    for entry in dialogues:
+        character_name = entry.get("character_name")
+        dialog = entry.get("dialog")
+        new_str = " Then, " + character_name + " says " + dialog + ". "
+        prompt += new_str
+    
+    return prompt

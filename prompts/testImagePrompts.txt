@@ -1,0 +1,22 @@
+{
+    "images": [
+      {
+        "image_id": "0",
+        "image_path": "./outputs/fluxImages/image0.webpp",
+        "image_download_path": "./outputs/runwayVidoes/image0.webapp"
+        "image_prompt": "Generate an image for a scene that is described next. The image should be a single image that captures the entire scene. The dialogues should be included in the image. There are 2 characters in the scene, as follows: Lady, Bus Driver. Scene setting: A busy street with a bus stop, a bus approaching, and a kid playing nearby..  Then, Lady says Oh no, I'm running late!.  Then, Bus Driver applies breaks and the bus goes (makes sound) Screech!."
+      },
+      {
+        "image_id": "1",
+        "image_path": "./outputs/fluxImages/image1.webpp",
+        "image_download_path": "./outputs/runwayVidoes/image1.webapp"
+        "image_prompt": "Generate an image for a scene that is described next. The image should be a single image that captures the entire scene. The dialogues should be included in the image. There are 2 characters in the scene, as follows: Kid, Kid's Mother. Scene setting: The same busy street, with the kid and his mother nearby..  Then, Kid says Waaah!.  Then, Kid's Mother says How could you do this to my child?!."
+      },
+      {
+        "image_id": "2",
+        "image_path": "./outputs/fluxImages/image2.webpp",
+        "image_download_path": "./outputs/runwayVidoes/image2.webapp",
+        "image_prompt": "Generate an image for a scene that is described next. The image should be a single image that captures the entire scene. The dialogues should be included in the image. There are 1 characters in the scene, as follows: Kid's Mother. Scene setting: The same busy street, with the kid's mother standing alone..  Then, Kid's Mother says Hmmm, salsa... (starts dancing)."
+      }
+    ]
+  }

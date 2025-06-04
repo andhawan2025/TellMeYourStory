@@ -1,0 +1,22 @@
+{
+    "videos": [
+      {
+        "video_id": "0",
+        "video_image_path": "./outputs/fluxImages/image0.webpp",
+        "video_download_path": "./outputs/runwayVidoes/video0.webapp"
+        "video_prompt": "Generate a video for a scene that is described next and presented in the image alongwith the dialogues. The dialogues should appear as callouts in the video. There are 2 characters in the scene, as follows: Lady, Bus Driver. Scene setting: A busy street with a bus stop, a bus approaching, and a kid playing nearby..  Then, Lady says Oh no, I'm running late!.  Then, Bus Driver applies brakes and the bus goes (makes sound) Screech"
+      },
+      {
+        "video_id": "1",
+        "video_image_path": "./outputs/fluxImages/image1.webpp",
+        "video_download_path": "./outputs/runwayVidoes/video1.webapp"
+        "video_prompt": "Generate a video for a scene that is described next and presented in the image alongwith the dialogues. The dialogues should appear as callouts in the video. There are 2 characters in the scene, as foles. The dialogues should appear as callouts in the video. There are 2 characters in the scene, as follows: Kid, Kid's Mother. Scene setting: The same busy street, with the kid and his mother nearby..  Then, Kid says Waaah!.  Then, Kid's Mother says How could you do this to my child?!."
+      },
+      {
+        "video_id": "2",
+        "video_image_path": "./outputs/fluxImages/image2.webpp",
+        "video_download_path": "./outputs/runwayVidoes/video2.webapp",
+        "video_prompt": "Generate a video for a scene that is described next and presented in the image alongwith the dialogues. The dialogues should appear as callouts in the video. There are 1 characters in the scene, as follows: Kid's Mother. Scene setting: The same busy street, with the kid's mother standing alone..  Then, Kid's Mother says Hmmm, salsa... (starts dancing)."
+      }
+    ]
+  }
