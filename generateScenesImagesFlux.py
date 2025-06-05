@@ -2,7 +2,9 @@ import gradio_client
 import os
 import shutil
 import openai
+from openai import OpenAI
 import requests
+import base64
 from urllib.parse import urlparse, unquote
 
 local_outputs_dir = r"C:\Users\andha\OneDrive\Documents\GitHub\TellMeYourStory\outputs\fluxImages"
@@ -44,26 +46,3 @@ def file_url_to_path(file_url):
     if path.startswith('/'):
         path = path[1:]
     return unquote(path.replace('/', '\\'))
-
-def generate_and_download_openai_scene_images(scene_prompt, file_path, openai_api_key):
-    # Call OpenAI API to generate image
-    openai.api_key = openai_api_key
-    response = openai.Image.create(
-        #model='dall-e-2',
-        prompt=scene_prompt,
-        n=1,
-        size='1024x1024'
-    )
-
-    # Extract image URL
-    image_url = response['data'][0]['url']
-    print(f"Image URL: {image_url}")
-
-    # Download the image
-    img_data = requests.get(image_url).content
-    with open(file_path, 'wb') as handler:
-        handler.write(img_data)
-    
-    print(f"Image downloaded and saved to {file_path}")
-
-    return file_path

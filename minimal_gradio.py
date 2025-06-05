@@ -7,7 +7,7 @@ import json
 
 import generateScreenplay
 import processScreenplay
-import generateScenesImages
+import generateScenesImagesFlux
 import getPrompts
 import generateVideoLeonardo
 import playVideos
@@ -97,7 +97,8 @@ if __name__ == "__main__":
         fn=main,  # or the function you want to expose
         inputs=gr.Textbox(label="Story Prompt"),  # specify your inputs here
         outputs=gr.PlayableVideo(label="Generated Video"), # specify your outputs here
-        title="Tell Me Your Story"
+        title="Tell Me Your Story",
+        description="Only a dummy video is generated for now."
     )
 
     main("test")

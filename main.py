@@ -2,7 +2,7 @@ import argparse
 
 import generateScreenplay
 import processScreenplay
-import generateScenesImages
+import generateSceneImagesOpenAI
 import getPrompts
 
 screenplay_file_path = "./outputs/screenplay.txt"
@@ -11,46 +11,46 @@ together_api_key = ""
 openai_api_key = ""
 
 def main():
-    #print ("Generating the screenplay for story", args.story_number)
-    #story_prompt = getPrompts.get_story_prompt(args.story_number)
-    #screenplay_prompt = getPrompts.get_screenplay_prompt()
-    #screenplay = generateScreenplay.generate_screenplay(story_prompt, screenplay_prompt, together_api_key)
+    print ("Generating the screenplay for story", args.story_number)
+    story_prompt = getPrompts.get_story_prompt(args.story_number)
+    screenplay_prompt = getPrompts.get_screenplay_prompt()
+    screenplay = generateScreenplay.generate_screenplay(story_prompt, screenplay_prompt, together_api_key)
+    print ("Screenplay generated successfully.")
     
     #Ensure any leading text in LLM response is removed.
-    #screenplay_json_string = str(screenplay)
-    #start_index = screenplay_json_string.find('{')
-    #if start_index != -1:
-    #    substring = screenplay_json_string[start_index:]
-    #else:
-    #    substring = screenplay_json_string
+    screenplay_json_string = str(screenplay)
+    start_index = screenplay_json_string.find('{')
+    if start_index != -1:
+        substring = screenplay_json_string[start_index:]
+    else:
+        substring = screenplay_json_string
 
-    #with open(screenplay_file_path, "w") as f:
-    #    f.write(substring)
-    #print ("Screenplay stored successfully")
+    with open(screenplay_file_path, "w") as f:
+        f.write(substring)
+    print ("Screenplay stored successfully")
 
-    #print ("Generating the scenes for the screenplay")
+    print ("Generating the scenes for the screenplay")
     scenes = processScreenplay.get_scenes_from_screenplay(screenplay_file_path)
-    #print (len(scenes), "scenes generated successfully")
+    print (len(scenes), "scenes generated successfully")
     
-    #print ("Generating image prompts")
+    print ("Generating image prompts")
     i = 0
     image_prompts = []
     for scene in scenes:
         image_prompts.append (processScreenplay.create_scene_prompt(scene))
         i += 1
-    #print ("Image prompts generated successfully")
+    print ("Image prompts generated successfully")
     
-    #print ("Generating the images for the scenes")
+    print ("Generating the images for the scenes")
     i = 0
     images = []
     image_paths = []
     for prompt in image_prompts:
         image_paths.append ("./outputs/openAIImages/image" + str(i) + ".png")
-        images.append (generateScenesImages.generate_and_download_openai_scene_images (prompt, image_paths[i], openai_api_key))
-        #print (image_paths[i])
+        images.append (generateSceneImagesOpenAI.generate_scene_image_gpt41mini (prompt, image_paths[i], openai_api_key))
+        print ("Image ", i, " generated and saved to ", image_paths[i])
         i += 1
-        break
-    #print ("Images generated and downloaded successfully.")
+    print ("Images generated and downloaded successfully.")
 
     #print ("Generating video prompts for the scenes")
     #i = 0

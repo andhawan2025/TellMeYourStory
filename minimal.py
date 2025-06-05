@@ -2,7 +2,7 @@ import argparse
 
 import generateScreenplay
 import processScreenplay
-import generateScenesImages
+import generateScenesImagesFlux
 import getPrompts
 import generateVideoLeonardo
 import playVideos
@@ -49,7 +49,7 @@ def main():
     image_paths = []
     for prompt in image_prompts:
         image_paths.append ("./outputs/openAIImages/image" + str(i) + ".png")
-        images.append (generateScenesImages.generate_and_download_openai_scene_images (prompt, image_paths[i], openai_api_key))
+        images.append (generateScenesImagesFlux.generate_and_download_openai_scene_images (prompt, image_paths[i], openai_api_key))
         #print (image_paths[i])
         i += 1
         break
