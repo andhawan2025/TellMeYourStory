@@ -1,45 +1,41 @@
 {
-    "title": "The Rush Hour",
-    "characters": ["Lady", "Bus Driver", "Kid", "Kid's Mother"],
+    "title": "Workout and Refreshment",
+    "characters": ["Guy 1", "Guy 2"],
     "scenes": [
         {
             "scene_number": 1,
-            "scene_characters": ["Lady", "Bus Driver"],
-            "scene_setting": "A busy street with a bus stop, a bus approaching, and a kid playing nearby.",
+            "scene_characters": ["Guy 1", "Guy 2"],
+            "scene_setting": "A gym, with two guys working out",
             "dialogue": [
                 {
-                    "character_name": "Lady",
-                    "dialog": "Oh no, I'm running late!"
+                    "character_name": "Guy 1",
+                    "dialog": "I'm tired."
                 },
                 {
-                    "character_name": "Bus Driver",
-                    "dialog": "Screech!"
+                    "character_name": "Guy 2",
+                    "dialog": "I'm hungry."
                 }
             ]
         },
         {
             "scene_number": 2,
-            "scene_characters": ["Kid", "Kid's Mother"],
-            "scene_setting": "The same busy street, with the kid and his mother nearby.",
+            "scene_characters": ["Guy 1"],
+            "scene_setting": "A swimming pool, with Guy 1",
             "dialogue": [
                 {
-                    "character_name": "Kid",
-                    "dialog": "Waaah!"
-                },
-                {
-                    "character_name": "Kid's Mother",
-                    "dialog": "How could you do this to my child?!"
+                    "character_name": "Guy 1",
+                    "dialog": "I feel better now."
                 }
             ]
         },
         {
             "scene_number": 3,
-            "scene_characters": ["Kid's Mother"],
-            "scene_setting": "The same busy street, with the kid's mother standing alone.",
+            "scene_characters": ["Guy 2"],
+            "scene_setting": "A cafe, with Guy 2",
             "dialogue": [
                 {
-                    "character_name": "Kid's Mother",
-                    "dialog": "Hmmm, salsa... (starts dancing)"
+                    "character_name": "Guy 2",
+                    "dialog": "I ordered a banana shake. It's very refreshing."
                 }
             ]
         }

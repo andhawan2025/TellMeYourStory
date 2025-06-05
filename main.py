@@ -62,8 +62,6 @@ def main():
     #print ("Video prompts generated successfully")
 
 
-
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-k", "--_together_api_key", type=str, default=None)
