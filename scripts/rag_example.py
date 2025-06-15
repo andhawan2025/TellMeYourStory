@@ -130,7 +130,7 @@ Answer:"""
         # Add source information to the answer
         sources_list = [doc["filename"] for doc in relevant_docs]
         sources_text = sources_list[0]
-        full_answer = f"{answer}\n\n📄 Source Used: {sources_text}"
+        full_answer = f"{answer}\n📄 Source Used: {sources_text}"
 
         return full_answer
 
@@ -187,7 +187,7 @@ if __name__ == "__main__":
     # Get question from user
     print("\nEnter your question about the screenplays (or 'quit' to exit):")
     while True:
-        question = input("\nQuestion: ").strip()
+        question = input("Question: ").strip()
         if question.lower() == 'quit':
             break
         if not question:
@@ -195,5 +195,5 @@ if __name__ == "__main__":
             continue
             
         answer = run_rag(data_dict, question)
-        print(f"\n🤖 Answer: {answer}\n")
+        print(f"🤖 Answer: {answer}")
         print("-" * 50)
