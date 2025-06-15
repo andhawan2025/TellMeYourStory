@@ -15,6 +15,14 @@
       {
         "story_id": "4",
         "story_prompt": "There are two guys working out in the gym. First one says he's tired. The second one says he is hungry. The first guy goes to the swimming pool to cool off and says he feels better now. The second guy orders a banana shake and says it is very refreshing."
+      },
+      {
+        "story_id": "5",
+        "story_prompt": "In the first scene, there is a girl sitting on a bench in a gym wearing a pink gym outfit and she says she is tired. In the second scene, she is in another area of the gym wearing the same clothes and she just dropped a weight and drops it on her foot. The weight is next to her foot and she is looking at it and says OUCH. In the third scene, the girl is still standing next to the weight wearing the same outfit but now she's looking up towards a good looking man that tells her do you need help."
+      },
+      {
+        "story_id": "6",
+        "story_prompt": "A man is showing off his new car to friends and family. A woman comes and makes fun of the car, saying that she has a better one. Then the man and women race in their cars."
       }
     ]
   }

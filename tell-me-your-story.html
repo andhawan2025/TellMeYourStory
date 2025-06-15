@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tell Me Your Story</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(to right, #9333ea, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+        .character-card {
+            transition: all 0.2s ease-in-out;
+        }
+        .character-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .trait-button {
+            transition: all 0.2s ease-in-out;
+        }
+        .trait-button.selected {
+            background: linear-gradient(to right, #9333ea, #2563eb);
+            color: white;
+        }
+        .progress-bar {
+            transition: width 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Landing Page -->
+    <div id="landing" class="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100">
+        <!-- Header -->
+        <header class="px-4 lg:px-6 h-16 flex items-center border-b bg-white/80 backdrop-blur-sm">
+            <div class="flex items-center space-x-2">
+                <i data-lucide="video" class="h-8 w-8 text-purple-600"></i>
+                <span class="text-xl font-bold text-gray-900">Tell Me Your Story</span>
+            </div>
+            <nav class="ml-auto flex gap-4 sm:gap-6">
+                <button onclick="showStep('story')" class="px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors">
+                    Get Started
+                </button>
+            </nav>
+        </header>
+
+        <!-- Hero Section -->
+        <section class="w-full py-12 md:py-24 lg:py-32">
+            <div class="container px-4 md:px-6 mx-auto">
+                <div class="grid gap-6 lg:grid-cols-2 lg:gap-12">
+                    <div class="flex flex-col justify-center space-y-4">
+                        <div class="space-y-2">
+                            <h1 class="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl gradient-text">
+                                Transform Your Stories Into Stunning Videos
+                            </h1>
+                            <p class="max-w-[600px] text-gray-600 md:text-xl">
+                                Share your ideas, stories, and imagination. Our AI will bring them to life with personalized
+                                characters and cinematic visuals.
+                            </p>
+                        </div>
+                        <div class="flex flex-col gap-2 min-[400px]:flex-row">
+                            <button onclick="showStep('story')" class="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg font-medium transition-all inline-flex items-center">
+                                Start Creating <i data-lucide="arrow-right" class="ml-2 h-4 w-4"></i>
+                            </button>
+                            <button class="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg font-medium hover:bg-gray-50 transition-colors">
+                                Watch Demo
+                            </button>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center">
+                        <div class="relative">
+                            <div class="w-80 h-80 bg-gradient-to-br from-purple-400 to-blue-500 rounded-3xl flex items-center justify-center">
+                                <i data-lucide="play" class="h-20 w-20 text-white"></i>
+                            </div>
+                            <div class="absolute -top-4 -right-4 w-16 h-16 bg-yellow-400 rounded-full flex items-center justify-center">
+                                <i data-lucide="sparkles" class="h-8 w-8 text-yellow-800"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="w-full py-12 md:py-24 lg:py-32 bg-white">
+            <div class="container px-4 md:px-6 mx-auto">
+                <div class="flex flex-col items-center justify-center space-y-4 text-center">
+                    <div class="space-y-2">
+                        <h2 class="text-3xl font-bold tracking-tighter sm:text-5xl">How It Works</h2>
+                        <p class="max-w-[900px] text-gray-600 md:text-xl">
+                            Three simple steps to transform your story into a captivating video
+                        </p>
+                    </div>
+                </div>
+                <div class="mx-auto grid max-w-5xl items-center gap-6 py-12 lg:grid-cols-3 lg:gap-12">
+                    <div class="bg-white rounded-lg border shadow-sm p-6 text-center">
+                        <div class="mx-auto w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                            <span class="text-xl font-bold text-purple-600">1</span>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Share Your Story</h3>
+                        <p class="text-gray-600">Write your story, idea, or script in up to 30 sentences</p>
+                    </div>
+                    <div class="bg-white rounded-lg border shadow-sm p-6 text-center">
+                        <div class="mx-auto w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                            <i data-lucide="users" class="h-6 w-6 text-blue-600"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Customize Characters</h3>
+                        <p class="text-gray-600">Upload avatars and define personality traits for your characters</p>
+                    </div>
+                    <div class="bg-white rounded-lg border shadow-sm p-6 text-center">
+                        <div class="mx-auto w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                            <i data-lucide="video" class="h-6 w-6 text-green-600"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Watch Your Video</h3>
+                        <p class="text-gray-600">Our AI generates a stunning video bringing your story to life</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-purple-600 to-blue-600">
+            <div class="container px-4 md:px-6 mx-auto">
+                <div class="flex flex-col items-center justify-center space-y-4 text-center text-white">
+                    <div class="space-y-2">
+                        <h2 class="text-3xl font-bold tracking-tighter sm:text-5xl">Ready to Bring Your Story to Life?</h2>
+                        <p class="max-w-[600px] text-purple-100 md:text-xl">
+                            Join thousands of creators who have transformed their ideas into amazing videos
+                        </p>
+                    </div>
+                    <button onclick="showStep('story')" class="px-6 py-3 bg-white text-purple-600 hover:bg-gray-100 rounded-lg font-medium transition-colors inline-flex items-center">
+                        Start Creating Now <i data-lucide="arrow-right" class="ml-2 h-4 w-4"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Story Input Page -->
+    <div id="story" class="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 p-4 hidden">
+        <div class="max-w-4xl mx-auto py-8">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold mb-2">Tell Me Your Story</h1>
+                <p class="text-gray-600">Share your story in up to 30 sentences</p>
+            </div>
+
+            <div class="bg-white rounded-lg border shadow-sm">
+                <div class="p-6 border-b">
+                    <h2 class="text-xl font-semibold">Your Story</h2>
+                    <p class="text-gray-600 mt-1">
+                        Write your story, idea, or script. Our AI will identify characters and bring your narrative to life.
+                    </p>
+                </div>
+                <div class="p-6 space-y-4">
+                    <div>
+                        <textarea
+                            id="storyInput"
+                            placeholder="Once upon a time, in a magical kingdom far away..."
+                            class="w-full h-72 p-4 border rounded-lg resize-none text-base focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                            oninput="updateSentenceCount()"
+                        ></textarea>
+                        <div class="flex justify-between items-center mt-2 text-sm">
+                            <span id="sentenceCount" class="text-gray-500">0/30 sentences</span>
+                            <span id="errorMessage" class="text-red-500 flex items-center hidden">
+                                <i data-lucide="x" class="h-4 w-4 mr-1"></i>
+                                Too many sentences
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button onclick="showStep('landing')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                            Back
+                        </button>
+                        <button id="continueBtn" onclick="continueToCharacters()" disabled class="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg font-medium transition-all inline-flex items-center disabled:opacity-50 disabled:cursor-not-allowed">
+                            Continue to Characters <i data-lucide="arrow-right" class="ml-2 h-4 w-4"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Characters Page -->
+    <div id="characters" class="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 p-4 hidden">
+        <div class="max-w-6xl mx-auto py-8">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold mb-2">Customize Your Characters</h1>
+                <p class="text-gray-600">Upload avatars and define personality traits for each character</p>
+            </div>
+
+            <div id="charactersGrid" class="grid gap-6 md:grid-cols-2 lg:grid-cols-3 mb-8">
+                <!-- Characters will be populated by JavaScript -->
+            </div>
+
+            <div class="flex gap-4 justify-center">
+                <button onclick="showStep('story')" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                    Back to Story
+                </button>
+                <button onclick="generateVideo()" class="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg font-medium transition-all inline-flex items-center">
+                    Generate Video <i data-lucide="video" class="ml-2 h-4 w-4"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Generation Page -->
+    <div id="video" class="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 p-4 hidden">
+        <div class="max-w-4xl mx-auto py-8">
+            <div class="text-center mb-8">
+                <h1 id="videoTitle" class="text-3xl font-bold mb-2">Generating Your Video...</h1>
+                <p id="videoSubtitle" class="text-gray-600">Our AI is creating your personalized video</p>
+            </div>
+
+            <div class="bg-white rounded-lg border shadow-sm">
+                <div class="p-8">
+                    <div id="videoProgress" class="space-y-6">
+                        <div class="text-center">
+                            <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                                <i data-lucide="sparkles" class="h-8 w-8 text-white animate-pulse"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-2">Creating Magic...</h3>
+                            <p class="text-gray-600">This usually takes 2-3 minutes</p>
+                        </div>
+
+                        <div class="space-y-2">
+                            <div class="flex justify-between text-sm">
+                                <span>Progress</span>
+                                <span id="progressPercent">0%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div id="progressBar" class="bg-gradient-to-r from-purple-600 to-blue-600 h-2 rounded-full progress-bar" style="width: 0%"></div>
+                            </div>
+                        </div>
+
+                        <div class="text-sm text-gray-600 space-y-1">
+                            <p id="step1">✓ Analyzing your story</p>
+                            <p id="step2">✓ Processing characters</p>
+                            <p id="step3" class="opacity-50">○ Generating scenes</p>
+                            <p id="step4" class="opacity-50">○ Adding final touches</p>
+                        </div>
+                    </div>
+
+                    <div id="videoResult" class="space-y-6 hidden">
+                        <div class="aspect-video bg-gradient-to-br from-gray-900 to-gray-700 rounded-lg flex items-center justify-center">
+                            <div class="text-center text-white">
+                                <i data-lucide="play" class="h-16 w-16 mx-auto mb-4"></i>
+                                <p class="text-lg">Your Generated Video</p>
+                                <p class="text-sm opacity-75">Click to play</p>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4 justify-center">
+                            <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">Download Video</button>
+                            <button class="px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">Share Video</button>
+                            <button onclick="resetApp()" class="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white rounded-lg font-medium transition-all">
+                                Create Another Video
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global state
+        let currentStep = 'landing';
+        let story = '';
+        let characters = [];
+        let videoProgress = 0;
+        let videoGenerated = false;
+
+        const adjectives = [
+            "Brave", "Mysterious", "Cheerful", "Wise", "Adventurous", "Gentle",
+            "Fierce", "Curious", "Loyal", "Witty", "Compassionate", "Bold",
+            "Clever", "Graceful", "Determined", "Playful", "Noble", "Mischievous",
+            "Confident", "Humble", "Energetic", "Calm", "Ambitious", "Kind"
+        ];
+
+        // Initialize Lucide icons
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
+        });
+
+        function showStep(step) {
+            // Hide all steps
+            document.getElementById('landing').classList.add('hidden');
+            document.getElementById('story').classList.add('hidden');
+            document.getElementById('characters').classList.add('hidden');
+            document.getElementById('video').classList.add('hidden');
+            
+            // Show current step
+            document.getElementById(step).classList.remove('hidden');
+            currentStep = step;
+        }
+
+        function countSentences(text) {
+            return text.split(/[.!?]+/).filter(sentence => sentence.trim().length > 0).length;
+        }
+
+        function updateSentenceCount() {
+            const textarea = document.getElementById('storyInput');
+            const countElement = document.getElementById('sentenceCount');
+            const errorElement = document.getElementById('errorMessage');
+            const continueBtn = document.getElementById('continueBtn');
+            
+            story = textarea.value;
+            const sentenceCount = countSentences(story);
+            
+            countElement.textContent = `${sentenceCount}/30 sentences`;
+            
+            if (sentenceCount > 30) {
+                countElement.className = 'text-red-500';
+                errorElement.classList.remove('hidden');
+                continueBtn.disabled = true;
+            } else {
+                countElement.className = 'text-gray-500';
+                errorElement.classList.add('hidden');
+                continueBtn.disabled = story.trim().length === 0;
+            }
+        }
+
+        function extractCharacters(storyText) {
+            const commonNames = ["Alex", "Sarah", "John", "Emma", "Michael", "Lisa", "David", "Anna"];
+            const foundNames = commonNames.filter(name => 
+                storyText.toLowerCase().includes(name.toLowerCase())
+            );
+            
+            if (foundNames.length === 0) {
+                foundNames.push("Main Character", "Supporting Character");
+            }
+            
+            return foundNames.slice(0, 4).map(name => ({ 
+                name, 
+                traits: [],
+                avatar: null 
+            }));
+        }
+
+        function continueToCharacters() {
+            characters = extractCharacters(story);
+            renderCharacters();
+            showStep('characters');
+        }
+
+        function renderCharacters() {
+            const grid = document.getElementById('charactersGrid');
+            grid.innerHTML = '';
+            
+            characters.forEach((character, index) => {
+                const characterCard = document.createElement('div');
+                characterCard.className = 'bg-white rounded-lg border shadow-sm character-card';
+                characterCard.innerHTML = `
+                    <div class="p-6 border-b">
+                        <h3 class="text-lg font-semibold">${character.name}</h3>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Avatar (Optional)</label>
+                            <input type="file" id="avatar-${index}" accept="image/*" class="hidden" onchange="handleAvatarUpload(${index}, this)">
+                            <button onclick="document.getElementById('avatar-${index}').click()" class="w-full px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors inline-flex items-center justify-center">
+                                <i data-lucide="upload" class="h-4 w-4 mr-2"></i>
+                                <span id="avatar-text-${index}">${character.avatar ? 'Change Avatar' : 'Upload Avatar'}</span>
+                            </button>
+                            <p id="avatar-status-${index}" class="text-sm text-green-600 mt-1 items-center ${character.avatar ? 'flex' : 'hidden'}">
+                                <i data-lucide="check" class="h-4 w-4 mr-1"></i>
+                                Avatar uploaded
+                            </p>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Personality Traits</label>
+                            <div class="grid grid-cols-2 gap-2 max-h-40 overflow-y-auto">
+                                ${adjectives.map(trait => `
+                                    <button onclick="toggleTrait(${index}, '${trait}')" 
+                                            class="trait-button px-2 py-1 text-xs border rounded transition-all ${character.traits.includes(trait) ? 'selected' : 'border-gray-300 text-gray-700 hover:bg-gray-50'}"
+                                            data-character="${index}" data-trait="${trait}">
+                                        ${trait}
+                                    </button>
+                                `).join('')}
+                            </div>
+                            <p id="traits-${index}" class="text-sm text-gray-600 mt-2 ${character.traits.length > 0 ? '' : 'hidden'}">
+                                Selected: ${character.traits.join(', ')}
+                            </p>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(characterCard);
+            });
+            
+            // Re-initialize Lucide icons for the new content
+            lucide.createIcons();
+        }
+
+        function handleAvatarUpload(index, input) {
+            const file = input.files[0];
+            if (file) {
+                characters[index].avatar = file;
+                document.getElementById(`avatar-text-${index}`).textContent = 'Change Avatar';
+                document.getElementById(`avatar-status-${index}`).classList.remove('hidden');
+                document.getElementById(`avatar-status-${index}`).classList.add('flex');
+                lucide.createIcons();
+            }
+        }
+
+        function toggleTrait(characterIndex, trait) {
+            const character = characters[characterIndex];
+            const traitIndex = character.traits.indexOf(trait);
+            
+            if (traitIndex === -1) {
+                character.traits.push(trait);
+            } else {
+                character.traits.splice(traitIndex, 1);
+            }
+            
+            // Update button appearance
+            const button = document.querySelector(`[data-character="${characterIndex}"][data-trait="${trait}"]`);
+            if (character.traits.includes(trait)) {
+                button.className = 'trait-button px-2 py-1 text-xs border rounded transition-all selected';
+            } else {
+                button.className = 'trait-button px-2 py-1 text-xs border rounded transition-all border-gray-300 text-gray-700 hover:bg-gray-50';
+            }
+            
+            // Update traits display
+            const traitsDisplay = document.getElementById(`traits-${characterIndex}`);
+            if (character.traits.length > 0) {
+                traitsDisplay.textContent = `Selected: ${character.traits.join(', ')}`;
+                traitsDisplay.classList.remove('hidden');
+            } else {
+                traitsDisplay.classList.add('hidden');
+            }
+        }
+
+        function generateVideo() {
+            showStep('video');
+            videoProgress = 0;
+            videoGenerated = false;
+            
+            document.getElementById('videoProgress').classList.remove('hidden');
+            document.getElementById('videoResult').classList.add('hidden');
+            
+            const interval = setInterval(() => {
+                videoProgress += 10;
+                updateVideoProgress();
+                
+                if (videoProgress >= 100) {
+                    clearInterval(interval);
+                    videoGenerated = true;
+                    showVideoResult();
+                }
+            }, 500);
+        }
+
+        function updateVideoProgress() {
+            document.getElementById('progressPercent').textContent = `${videoProgress}%`;
+            document.getElementById('progressBar').style.width = `${videoProgress}%`;
+            
+            if (videoProgress > 50) {
+                document.getElementById('step3').innerHTML = '✓ Generating scenes';
+                document.getElementById('step3').classList.remove('opacity-50');
+            }
+            
+            if (videoProgress > 80) {
+                document.getElementById('step4').innerHTML = '✓ Adding final touches';
+                document.getElementById('step4').classList.remove('opacity-50');
+            }
+        }
+
+        function showVideoResult() {
+            document.getElementById('videoTitle').textContent = 'Your Video is Ready!';
+            document.getElementById('videoSubtitle').textContent = 'Your story has been transformed into an amazing video';
+            document.getElementById('videoProgress').classList.add('hidden');
+            document.getElementById('videoResult').classList.remove('hidden');
+            lucide.createIcons();
+        }
+
+        function resetApp() {
+            story = '';
+            characters = [];
+            videoProgress = 0;
+            videoGenerated = false;
+            document.getElementById('storyInput').value = '';
+            updateSentenceCount();
+            showStep('story');
+        }
+    </script>
+</body>
+</html> 

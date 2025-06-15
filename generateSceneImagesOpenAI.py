@@ -14,7 +14,7 @@ def generate_scene_image_gpt41mini (scene_prompt, file_path, openai_api_key):
     response = client.responses.create(
         model="gpt-4.1-mini",
         input=scene_prompt,
-        tools=[{"type": "image_generation"}],
+        tools=[{"type": "image_generation",}],
     )
 
     # Save the image to a file

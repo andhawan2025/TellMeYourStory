@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Generating Video – Tell Me Your Story{% endblock %}
+
+{% block nav %}
+<form method="POST" action="{{ url_for('reset') }}" class="inline">
+    <button type="submit" class="px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors">Start Over</button>
+</form>
+{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-100 p-4">
+    <div class="max-w-4xl mx-auto py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold mb-2">Generating Your Video…</h1>
+            <p class="text-gray-600">Our AI is creating your personalized video</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow-lg p-8">
+            <div class="space-y-6">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="h-8 w-8 text-white animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Creating Magic…</h3>
+                    <p class="text-gray-600">This usually takes 2–3 minutes</p>
+                </div>
+
+                <div class="space-y-2">
+                    <div class="flex justify-between text-sm">
+                        <span>Progress</span>
+                        <span id="progress">0%</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div id="progress-bar" class="gradient-button h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="text-sm text-gray-600 space-y-1">
+                    <p>✓ Analyzing your story</p>
+                    <p id="scenes-status" class="opacity-50">○ Generating scenes</p>
+                    <p id="final-status" (class="opacity-50">○ Adding final touches</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Simulate progress updates
+    let progress = 0;
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress');
+    const scenesStatus = document.getElementById('scenes-status');
+    const finalStatus = document.getElementById('final-status');
+
+    function updateProgress() {
+        progress += 5;
+        if (progress > 100) {
+            progress = 100;
+            clearInterval(interval);
+            // POST to /video (to set session['video_generated'] to true) and then redirect to /video (video.html)
+            fetch("{{ url_for('video') }}", { method: "POST" })
+                .then(() => { window.location.href = "{{ url_for('video') }}"; });
+        }
+        progressBar.style.width = `${progress}%`;
+        progressText.textContent = `${progress}%`;
+        if (progress > 50) {
+            scenesStatus.innerHTML = '✓ Generating scenes';
+            scenesStatus.classList.remove('opacity-50');
+        }
+        if (progress > 80) {
+            finalStatus.innerHTML = '✓ Adding final touches';
+            finalStatus.classList.remove('opacity-50');
+        }
+    }
+
+    const interval = setInterval(updateProgress, 500);
+</script>
+{% endblock %} 

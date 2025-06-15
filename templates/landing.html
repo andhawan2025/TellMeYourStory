@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}Tell Me Your Story - Transform Stories Into Videos{% endblock %}
+
+{% block nav %}
+<a href="{{ url_for('story') }}" class="px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors">
+    Get Started
+</a>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section (with "How it works" merged) -->
+<section class="w-full py-12 md:py-24 lg:py-32">
+    <div class="container px-4 md:px-6 mx-auto max-w-7xl">
+        <div class="grid gap-6 lg:grid-cols-2 lg:gap-12 items-center">
+            <!-- Left column (Transform your story) -->
+            <div class="flex flex-col justify-center space-y-4">
+                <div class="space-y-2">
+                    <h1 class="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl gradient-text">
+                        Transform Your Stories Into Stunning Videos
+                    </h1>
+                    <p class="max-w-[600px] text-gray-600 md:text-xl">
+                        Share your ideas, stories, and imagination. Our AI will bring them to life with personalized
+                        characters and cinematic visuals.
+                    </p>
+                </div>
+                <div class="flex flex-col gap-2 min-[400px]:flex-row">
+                    <a href="{{ url_for('story') }}" class="gradient-button text-white px-6 py-3 rounded-lg font-medium flex items-center justify-center hover:shadow-lg transition-all">
+                        Start Creating
+                        <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <!-- Right column (How it works) -->
+            <div class="flex flex-col items-center justify-center space-y-4 text-center">
+                <div class="space-y-2">
+                    <h2 class="text-3xl font-bold tracking-tighter sm:text-5xl">How It Works</h2>
+                    <p class="max-w-[900px] text-gray-600 md:text-xl">
+                        Three simple steps to transform your story into a captivating video
+                    </p>
+                </div>
+                <div class="mx-auto grid w-full items-center gap-6 lg:grid-cols-3 lg:gap-12">
+                    <!-- Step 1 -->
+                    <div class="bg-white border border-gray-200 rounded-lg p-6 text-center shadow-sm card-hover h-full">
+                        <div class="mx-auto w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                            <span class="text-xl font-bold text-purple-600">1</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Share Your Story</h3>
+                        <p class="text-gray-600">Write your story, idea, or script in up to 30 sentences</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="bg-white border border-gray-200 rounded-lg p-6 text-center shadow-sm card-hover h-full">
+                        <div class="mx-auto w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                            <svg class="h-6 w-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Customize Characters</h3>
+                        <p class="text-gray-600">Upload avatars and define personality traits for your characters</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="bg-white border border-gray-200 rounded-lg p-6 text-center shadow-sm card-hover h-full">
+                        <div class="mx-auto w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                            <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Watch Your Video</h3>
+                        <p class="text-gray-600">Our AI generates a stunning video bringing your story to life</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-r from-purple-600 to-blue-600">
+    <div class="container px-4 md:px-6 mx-auto max-w-7xl">
+        <div class="flex flex-col items-center justify-center space-y-4 text-center text-white">
+            <div class="space-y-2">
+                <h2 class="text-3xl font-bold tracking-tighter sm:text-5xl">Ready to Bring Your Story to Life?</h2>
+                <p class="max-w-[600px] text-purple-100 md:text-xl">
+                    Join thousands of creators who have transformed their ideas into amazing videos
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %} 

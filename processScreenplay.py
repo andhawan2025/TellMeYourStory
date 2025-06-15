@@ -83,6 +83,7 @@ def create_video_prompt(scene):
 
     prompt = (
         f"Generate a video for a scene that is described next and presented in the image alongwith the dialogues. "
+        f"The video should fit in a 1024x1024 canvas. The video should be no longer than 5 seconds"
         f"The dialogues should appear as callouts in the video. "
         f"There are {len(scene_characters)} characters in the scene, as follows: {characters}. "
         f"Scene setting: {setting}. "

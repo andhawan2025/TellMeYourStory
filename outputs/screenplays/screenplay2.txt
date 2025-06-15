@@ -1,0 +1,36 @@
+{
+    "title": "A Day in the Kitchen",
+    "characters": ["Chef", "Restaurant Owner"],
+    "scenes": [
+        {
+            "scene_number": 1,
+            "scene_characters": ["Chef", "Restaurant Owner"],
+            "scene_setting": "A busy kitchen, mid-day. The chef is cooking, and the restaurant owner walks in.",
+            "dialogue": [
+                {
+                    "character_name": "Restaurant Owner",
+                    "dialog": "I'm giving everyone a 50% bonus on tips today!"
+                },
+                {
+                    "character_name": "Chef",
+                    "dialog": "Wow, that's great news!"
+                }
+            ]
+        },
+        {
+            "scene_number": 2,
+            "scene_characters": ["Chef", "Restaurant Staff"],
+            "scene_setting": "The same kitchen, now with the restaurant staff present. They are all clapping and cheering.",
+            "dialogue": [
+                {
+                    "character_name": "Chef",
+                    "dialog": "Bravo! Bravo!"
+                },
+                {
+                    "character_name": "Chef",
+                    "dialog": "Ah, ah, ah, 'La Donna Mobile'!"
+                }
+            ]
+        }
+    ]
+}

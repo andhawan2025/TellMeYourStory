@@ -1,0 +1,43 @@
+{
+    "title": "The Gym",
+    "characters": ["Girl", "Good Looking Man"],
+    "scenes": [
+        {
+            "scene_number": 1,
+            "scene_characters": ["Girl"],
+            "scene_setting": "A girl is sitting on a bench in a gym, wearing a pink gym outfit, looking tired.",
+            "dialogue": [
+                {
+                    "character_name": "Girl",
+                    "dialog": "I'm so tired."
+                }
+            ]
+        },
+        {
+            "scene_number": 2,
+            "scene_characters": ["Girl"],
+            "scene_setting": "The girl is now standing next to a weight in another area of the gym, still wearing the same pink gym outfit, looking down at the weight.",
+            "dialogue": [
+                {
+                    "character_name": "Girl",
+                    "dialog": "OUCH"
+                }
+            ]
+        },
+        {
+            "scene_number": 3,
+            "scene_characters": ["Girl", "Good Looking Man"],
+            "scene_setting": "The girl is still standing next to the weight, looking up at a good looking man who has approached her.",
+            "dialogue": [
+                {
+                    "character_name": "Good Looking Man",
+                    "dialog": "Do you need help?"
+                },
+                {
+                    "character_name": "Girl",
+                    "dialog": ""
+                }
+            ]
+        }
+    ]
+}
