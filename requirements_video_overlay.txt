@@ -1,0 +1,8 @@
+moviepy==1.0.3
+numpy>=1.21.0
+Pillow>=8.0.0
+imageio>=2.9.0
+imageio-ffmpeg>=0.4.5
+decorator>=4.4.2
+proglog>=0.1.9
+requests>=2.25.0 

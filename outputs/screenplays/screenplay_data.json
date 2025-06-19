@@ -1,0 +1,99 @@
+{
+    "title": "Market Trip",
+    "characters": [
+        {
+            "character_number": 1,
+            "character_name": "Cat",
+            "character_gender": "Female",
+            "character_agegroup": "Adult"
+        },
+        {
+            "character_number": 2,
+            "character_name": "Dog",
+            "character_gender": "Male",
+            "character_agegroup": "Adult"
+        }
+    ],
+    "scenes": [
+        {
+            "scene_number": 1,
+            "scene_characters": [
+                1,
+                2
+            ],
+            "scene_setting": "The cat and dog are walking to the market on a sunny day.",
+            "dialogue": [
+                {
+                    "character_number": "1",
+                    "dialog": "I'm so excited to go to the market!"
+                },
+                {
+                    "character_number": "2",
+                    "dialog": "Me too! I love sniffing out new treats."
+                }
+            ]
+        },
+        {
+            "scene_number": 2,
+            "scene_characters": [
+                1
+            ],
+            "scene_setting": "The cat is at the fruit stand.",
+            "dialogue": [
+                {
+                    "character_number": "1",
+                    "dialog": "I'll take a banana, please."
+                }
+            ]
+        },
+        {
+            "scene_number": 3,
+            "scene_characters": [
+                2
+            ],
+            "scene_setting": "The dog is at the bakery stand.",
+            "dialogue": [
+                {
+                    "character_number": "2",
+                    "dialog": "I'll take a blueberry muffin, please."
+                }
+            ]
+        },
+        {
+            "scene_number": 4,
+            "scene_characters": [
+                1,
+                2
+            ],
+            "scene_setting": "The cat and dog are at the checkout stand.",
+            "dialogue": [
+                {
+                    "character_number": "1",
+                    "dialog": "Thank you!"
+                },
+                {
+                    "character_number": "2",
+                    "dialog": "Thank you!"
+                }
+            ]
+        },
+        {
+            "scene_number": 5,
+            "scene_characters": [
+                1,
+                2
+            ],
+            "scene_setting": "The cat and dog are walking home.",
+            "dialogue": [
+                {
+                    "character_number": "1",
+                    "dialog": "That was a great trip!"
+                },
+                {
+                    "character_number": "2",
+                    "dialog": "Definitely! I'm already thinking about our next trip."
+                }
+            ]
+        }
+    ]
+}

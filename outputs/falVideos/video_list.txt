@@ -1,3 +1,0 @@
-file 'C:/Users/andha/OneDrive/Documents/GitHub/TellMeYourStory/outputs/falVideos/video0.mp4'
-file 'C:/Users/andha/OneDrive/Documents/GitHub/TellMeYourStory/outputs/falVideos/video1.mp4'
-file 'C:/Users/andha/OneDrive/Documents/GitHub/TellMeYourStory/outputs/falVideos/video2.mp4'

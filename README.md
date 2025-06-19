@@ -19,5 +19,6 @@
 # Running the main application application
 python main.py -k <TOGETHER_APIKEY>
                -o <OPEN_AI_APIKEY>
-               -l <LEONARDO_AI_APIKEY>
+               -f <FAL_AI_APIKEY>
+               -e <ELEVENLABS_APIKEY>
                -s <STORY_NUMBER>
