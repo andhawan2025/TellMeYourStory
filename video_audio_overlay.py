@@ -1,5 +1,5 @@
 import os
-from moviepy import VideoFileClip, AudioFileClip, CompositeAudioClip, concatenate_videoclips
+from moviepy import VideoFileClip, AudioFileClip, CompositeAudioClip, concatenate_videoclips, ColorClip
 
 video_path0 = "./outputs/falVideos/video0.mp4"
 audio_paths0 = ["./outputs/elevenlabsAudio/scene0_1.mp3", "./outputs/elevenlabsAudio/scene0_2.mp3"]
@@ -58,11 +58,11 @@ def combineVideos():
     video4 = VideoFileClip("./outputs/video_with_audio/combined_video4.mp4")
 
     # Create a 1-second black screen (same size as clips)
-    #gap_duration = 1  # seconds
-    #gap = ColorClip(size=video0.size, color=(0, 0, 0), duration=gap_duration)
+    gap_duration = 0.25  # seconds
+    gap = ColorClip(size=video0.size, color=(0, 0, 0), duration=gap_duration)
 
     # Create the sequence with gaps
-    final_clip = concatenate_videoclips([video0, video1, video2, video3, video4])
+    final_clip = concatenate_videoclips([video0, gap, video1, gap, video2, gap, video3, gap, video4])
 
     # Write the output
     final_clip.write_videofile("./outputs/video_with_audio/combined_with_gaps.mp4")
