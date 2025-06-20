@@ -10,7 +10,6 @@ llm_model="meta-llama/Llama-3-8b-chat-hf"
 # import libraries
 import json
 import together
-from together.complete import Complete
 story_prompt_path = "./prompts/storyPrompts.txt"
 screenplay_prompt_path = "./prompts/screenplayPromptTest.txt"
 
@@ -22,7 +21,7 @@ def generate_screenplay(story_prompt, screenplay_prompt, together_api_key):
 
     chatbot_prompt = screenplay_prompt.format(story_prompt=story_prompt)
 
-    response = Complete.create(
+    response = together.Complete.create(
         prompt=chatbot_prompt,
         model=llm_model,
         max_tokens=2048,

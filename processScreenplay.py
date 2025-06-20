@@ -64,7 +64,7 @@ def create_scene_prompt(scene, characters_list):
     prompt = (
         f"Generate an image for a scene that is described next. Proivde a high-resolution, hyperrealistic, highly detailed image, with cinematic lighting, ultra-sharp focus and 8K resolution."
         f"The imgage should be a single image that captures the entire scene. The image should fit in a 1024x1024 canvas. "
-        #f"The dialogues that are present in the scene should be included in the image. "
+        f"The dialogues that are present in the scene should not be included in the image. "
         f"There are {len(scene_characters)} characters in the scene, as follows: {characters}. "
         f"Scene setting: {setting}. "
     )

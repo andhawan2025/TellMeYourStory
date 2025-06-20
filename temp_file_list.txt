@@ -1,2 +1,0 @@
-file './outputs/audio/scene1_1_1.mp3'
-file './outputs/audio/scene1_2_2.mp3'
