@@ -3,9 +3,9 @@ import os
 import json
 import random
 
-PLAYHT_API_KEY = "ak-aed6fbc348524361a4b97c27dec2d980"
-#PLAYHT_USER_ID = "ak-aed6fbc348524361a4b97c27dec2d980"
-PLAYHT_USER_ID = "lBdguWJw2XMv3xZ8itKEfd1WV1y1"
+PLAYHT_API_KEY = ""
+#PLAYHT_USER_ID = ""
+PLAYHT_USER_ID = ""
 
 def generate_audio_playht(text, voice, playht_api_key, output_file_path):
     url = "https://api.play.ai/api/v1/tts"
