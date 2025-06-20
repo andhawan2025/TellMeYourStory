@@ -1,0 +1,63 @@
+{
+    "title": "Two Guys at the Gym",
+    "characters": [
+        {
+            "character_number": 1,
+            "character_name": "John",
+            "character_gender": "Male",
+            "character_agegroup": "Adult"
+        },
+        {
+            "character_number": 2,
+            "character_name": "Mike",
+            "character_gender": "Male",
+            "character_agegroup": "Adult"
+        }
+    ],
+    "scenes": [
+        {
+            "scene_number": 1,
+            "scene_characters": [
+                1,
+                2
+            ],
+            "scene_setting": "The scene takes place in a gym. John and Mike are working out on the treadmills. It is a sunny day and the gym is moderately crowded.",
+            "dialogue": [
+                {
+                    "character_number": "1",
+                    "dialog": "I'm tired."
+                },
+                {
+                    "character_number": "2",
+                    "dialog": "I'm hungry."
+                }
+            ]
+        },
+        {
+            "scene_number": 2,
+            "scene_characters": [
+                1
+            ],
+            "scene_setting": "The scene takes place at a swimming pool. John is standing by the pool, looking refreshed. It is still a sunny day.",
+            "dialogue": [
+                {
+                    "character_number": "1",
+                    "dialog": "I feel better now."
+                }
+            ]
+        },
+        {
+            "scene_number": 3,
+            "scene_characters": [
+                2
+            ],
+            "scene_setting": "The scene takes place at a juice bar. Mike is sitting at the counter, ordering a banana shake. It is still a sunny day.",
+            "dialogue": [
+                {
+                    "character_number": "2",
+                    "dialog": "This banana shake is very refreshing."
+                }
+            ]
+        }
+    ]
+}

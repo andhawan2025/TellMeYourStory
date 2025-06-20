@@ -1,0 +1,63 @@
+<screenplay>
+    <title>Two Guys at the Gym</title>
+    <characters>
+        <character>
+            <character_number>1</character_number>
+            <character_name>John</character_name>
+            <character_gender>Male</character_gender>
+            <character_agegroup>Adult</character_agegroup>
+        </character>
+        <character>
+            <character_number>2</character_number>
+            <character_name>Mike</character_name>
+            <character_gender>Male</character_gender>
+            <character_agegroup>Adult</character_agegroup>
+        </character>
+    </characters>
+    <scenes>
+        <scene>
+            <scene_number>1</scene_number>
+            <scene_characters>
+                <character_number>1</character_number>
+                <character_number>2</character_number>
+            </scene_characters>
+            <scene_setting>The scene takes place in a gym. John and Mike are working out on the treadmills. It is a sunny day and the gym is moderately crowded.</scene_setting>
+            <dialogue>
+                <dialogue_entry>
+                    <character_number>1</character_number>
+                    <dialog>I'm tired.</dialog>
+                </dialogue_entry>
+                <dialogue_entry>
+                    <character_number>2</character_number>
+                    <dialog>I'm hungry.</dialog>
+                </dialogue_entry>
+            </dialogue>
+        </scene>
+        <scene>
+            <scene_number>2</scene_number>
+            <scene_characters>
+                <character_number>1</character_number>
+            </scene_characters>
+            <scene_setting>The scene takes place at a swimming pool. John is standing by the pool, looking refreshed. It is still a sunny day.</scene_setting>
+            <dialogue>
+                <dialogue_entry>
+                    <character_number>1</character_number>
+                    <dialog>I feel better now.</dialog>
+                </dialogue_entry>
+            </dialogue>
+        </scene>
+        <scene>
+            <scene_number>3</scene_number>
+            <scene_characters>
+                <character_number>2</character_number>
+            </scene_characters>
+            <scene_setting>The scene takes place at a juice bar. Mike is sitting at the counter, ordering a banana shake. It is still a sunny day.</scene_setting>
+            <dialogue>
+                <dialogue_entry>
+                    <character_number>2</character_number>
+                    <dialog>This banana shake is very refreshing.</dialog>
+                </dialogue_entry>
+            </dialogue>
+        </scene>
+    </scenes>
+</screenplay>

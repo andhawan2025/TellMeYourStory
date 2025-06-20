@@ -19,7 +19,8 @@ VIDEOS_OUTPUT_DIR = "./outputs/videos/"
 AUDIO_OUTPUT_DIR = "./outputs/audios/"
 COMBINED_OUTPUT_DIR = "./outputs/combined/"
 
-PROMPTS_FILE_NAME = "prompts.json"
+PROMPTS_FILE_NAME = "storyPrompts.txt"
+SCREENPLAY_PROMPT_FILE_NAME = "ScreenplayPrompt.txt"
 SCREENPLAY_TXT_FILENAME = "screenplay.txt"
 SCREENPLAY_JSON_FILENAME = "screenplay.json"
 COMBINED_VIDEO_FILENAME = "combined_video_final.mp4"
@@ -31,7 +32,7 @@ fal_api_key = "" # images to video
 
 screenplay = None
 scenes = []
-character_list = []
+characters_list = []
 
 def setup_directories():
     """Step 0: Ensure all output directories exist"""
@@ -42,28 +43,33 @@ def setup_directories():
     utils.ensure_directory_exists(AUDIO_OUTPUT_DIR)
     utils.ensure_directory_exists(COMBINED_OUTPUT_DIR)
 
-def generate_screenplay_step(story_number):
+def generate_screenplay_step(story_number, story_prompt_path, screenplay_prompt_path, screenplay_output_path):
+    print(story_prompt_path)
+    print(screenplay_prompt_path)
     """Step 1: Generate the screenplay"""
-    if args.reset or not utils.check_file_exists(SCREENPLAY_OUTPUT_DIR + SCREENPLAY_TXT_FILENAME):
+    if args.reset or not utils.check_file_exists(screenplay_output_path):
         print("Generating the screenplay for story", story_number)
-        story_prompt = generateScreenplay.get_story_prompt(story_number)
-        screenplay_prompt = generateScreenplay.get_screenplay_prompt()
+        story_prompt = generateScreenplay.get_story_prompt(story_number, story_prompt_path)
+        screenplay_prompt = generateScreenplay.get_screenplay_prompt(screenplay_prompt_path)
         screenplay = generateScreenplay.generate_screenplay(story_prompt, screenplay_prompt, together_api_key)
         print("Screenplay generated successfully.")
         
         # Clean and store the screenplay
         cleaned_screenplay = utils.clean_screenplay_content(str(screenplay))
-        with open(SCREENPLAY_OUTPUT_DIR + SCREENPLAY_TXT_FILENAME, "w") as f:
+        with open(screenplay_output_path, "w") as f:
             f.write(cleaned_screenplay)
         print("Screenplay stored successfully\n")
     else:
         print("Screenplay file already exists, skipping generation.")
 
-def parse_screenplay_step():
-    """Step 2: Load and parse the screenplay XML to dictionary"""
-    if args.reset or not utils.check_file_exists(SCREENPLAY_OUTPUT_DIR + SCREENPLAY_JSON_FILENAME):
+def parse_screenplay_step(screenplay_output_path_txt, screenplay_output_path_json):
+    """
+    Step 2: Load and parse the screenplay XML to dictionary.
+    Read XML from TXT file and store it in JSON file.
+    """
+    if args.reset or not utils.check_file_exists(screenplay_output_path_json):
         print("Loading the screenplay and parsing XML to dictionary")
-        with open(SCREENPLAY_OUTPUT_DIR + SCREENPLAY_TXT_FILENAME, "r") as f:
+        with open(screenplay_output_path_txt, "r") as f:
             screenplay_content = f.read()
         
         screenplay_data = utils.parse_xml_screenplay_to_dict(screenplay_content)
@@ -73,12 +79,12 @@ def parse_screenplay_step():
             return None
         
         # save screenplay_data to a json file
-        with open(SCREENPLAY_OUTPUT_DIR + SCREENPLAY_JSON_FILENAME, "w") as f:
+        with open(screenplay_output_path_json, "w") as f:
             json.dump(screenplay_data, f, indent=4)
         print("Screenplay data saved successfully")
     else:
         print("Loading existing screenplay data from JSON")
-        with open(SCREENPLAY_OUTPUT_DIR + SCREENPLAY_JSON_FILENAME, "r") as f:
+        with open(screenplay_output_path_json, "r") as f:
             screenplay_data = json.load(f)
     
     return screenplay_data
@@ -112,6 +118,7 @@ def generate_images_step(image_prompts):
 def generate_audio_step(scenes, character_list):
     """Step 5: Generate audio for all the scenes"""
     print("Generating audio for all the scenes")
+    print(character_list)
     
     audio_files = []
     
@@ -207,8 +214,14 @@ def overlay_audio_step(scenes, audio_files):
 def combine_videos_step(videos_with_audio):
     """Step 9: Combine all videos into a single video"""
     print("Combining the videos into a single video")
-    videoAudioOverlay.combineVideos(videos_with_audio, COMBINED_OUTPUT_DIR, COMBINED_VIDEO_FILENAME)
-    print("Videos combined successfully")
+    
+    combined_video_path = os.path.join(COMBINED_OUTPUT_DIR, COMBINED_VIDEO_FILENAME)
+    
+    if args.reset or not utils.check_file_exists(combined_video_path):
+        videoAudioOverlay.combineVideos(videos_with_audio, COMBINED_OUTPUT_DIR, COMBINED_VIDEO_FILENAME)
+        print("Videos combined successfully")
+    else:
+        print("Combined video already exists, skipping combination.")
 
 def main():
     # Step 0: Setup directories
@@ -216,19 +229,24 @@ def main():
     
     # Step 1: Get user input and generate screenplay
     story_number = args.story_number
-    generate_screenplay_step(story_number)
+    story_prompt_path = PROMPTS_SOURCE_DIRECTORY + PROMPTS_FILE_NAME
+    screenplay_prompt_path = PROMPTS_SOURCE_DIRECTORY + SCREENPLAY_PROMPT_FILE_NAME
+    screenplay_output_path = SCREENPLAY_OUTPUT_DIR + SCREENPLAY_TXT_FILENAME
+    screenplay_output_path_json = SCREENPLAY_OUTPUT_DIR + SCREENPLAY_JSON_FILENAME
+
+    generate_screenplay_step(story_number, story_prompt_path, screenplay_prompt_path, screenplay_output_path)
     
     # Step 2: Parse screenplay
-    screenplay_data = parse_screenplay_step()
+    screenplay_data = parse_screenplay_step(screenplay_output_path, screenplay_output_path_json)
     if screenplay_data is None:
         return
     
     characters_list = screenplay_data.get("characters", [])
     scenes = screenplay_data.get("scenes", [])
     
-    print(len(scenes), "scenes loaded successfully")
-    print(len(characters_list), "characters loaded successfully")
-    print("Characters:", [char["character_name"] for char in characters_list], "\n")
+    #print(len(scenes), "scenes loaded successfully")
+    #print(len(characters_list), "characters loaded successfully")
+    #print("Characters:", characters_list, "\n")
     
     # Step 3: Generate image prompts
     image_prompts = generate_image_prompts_step(scenes, characters_list)
@@ -237,7 +255,7 @@ def main():
     image_paths = generate_images_step(image_prompts)
     
     # Step 5: Generate audio
-    audio_files = generate_audio_step(scenes, character_list)
+    audio_files = generate_audio_step(scenes, characters_list)
     
     # Step 6: Generate video prompts
     video_prompts = generate_video_prompts_step(scenes, characters_list)

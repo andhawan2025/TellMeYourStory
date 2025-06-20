@@ -53,10 +53,12 @@ def generate_audio_for_scene_dialogues(elevenlabs_api_key, scene, output_audio_d
     # List to store file paths for this scene
     audio_file_paths = []
     
+    print(character_list)
+
     # Generate audio for each dialogue in the scene
     for i, dialogue in enumerate(scene.get("dialogue", [])):
         char_num = str(dialogue.get("character_number", i))
-        
+        print(f"Character number for dialogue {i}: {char_num}")
         # Get character info from character_list
         character_info = None
         character_name = f"Character_{char_num}"
@@ -69,6 +71,7 @@ def generate_audio_for_scene_dialogues(elevenlabs_api_key, scene, output_audio_d
                     "gender": char.get("character_gender", "male").lower(),
                     "age_group": char.get("character_agegroup", "adult").lower()
                 }
+                print(f"Character info: {character_name}: {character_info}")
                 break
         
         if not character_info:
@@ -93,27 +96,24 @@ def generate_audio_for_scene_dialogues(elevenlabs_api_key, scene, output_audio_d
         
         print(f"  Generating audio for {character_name} (voice: {voice_id}): '{dialog_text[:50]}...'")
         
-        try:
-            # Generate audio using ElevenLabs API
-            audio = elevenlabs.generate(
-                text=dialog_text,
-                voice_id=voice_id,
-                model="eleven_multilingual_v2",
-                output_format="mp3_44100_128"
-            )
-            
-            # Save the audio file
-            with open(file_path, "wb") as f:
-                f.write(audio)
-            
-            audio_file_paths.append(file_path)
-            print(f"  Audio saved to {file_path}")
-            
-        except Exception as e:
-            print(f"  Error generating audio for {character_name}: {e}")
-            # Continue with next dialogue even if one fails
-            continue
-    
+        # Generate audio using ElevenLabs API
+        audio = elevenlabs.text_to_speech.convert(
+            text=dialog_text,
+            voice_id=voice_id,
+            #model="eleven_multilingual_v2",
+            output_format="mp3_44100_128"
+        )
+        
+        # Convert generator to bytes
+        audio_bytes = b''.join(audio)
+        
+        # Save the audio file
+        with open(file_path, "wb") as f:
+            f.write(audio_bytes)
+        
+        audio_file_paths.append(file_path)
+        print(f"  Audio saved to {file_path}")
+
     print(f"Generated {len(audio_file_paths)} audio files for Scene {scene_number}")
     return audio_file_paths
 

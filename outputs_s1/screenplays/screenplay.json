@@ -1,0 +1,98 @@
+{
+    "title": "Running Late",
+    "characters": [
+        {
+            "character_number": 1,
+            "character_name": "Lady",
+            "character_gender": "Female",
+            "character_agegroup": "Adult"
+        },
+        {
+            "character_number": 2,
+            "character_name": "Bus Driver",
+            "character_gender": "Male",
+            "character_agegroup": "Adult"
+        },
+        {
+            "character_number": 3,
+            "character_name": "Kid",
+            "character_gender": "Male",
+            "character_agegroup": "Kid"
+        },
+        {
+            "character_number": 4,
+            "character_name": "Kid's Mother",
+            "character_gender": "Female",
+            "character_agegroup": "Adult"
+        }
+    ],
+    "scenes": [
+        {
+            "scene_number": 1,
+            "scene_characters": [
+                1,
+                2
+            ],
+            "scene_setting": "A busy street with a bus stop and a bus approaching. The lady is running towards the bus stop, and the bus driver is at the wheel.",
+            "dialogue": [
+                {
+                    "character_number": "1",
+                    "dialog": "I'm running late!"
+                },
+                {
+                    "character_number": "2",
+                    "dialog": "Hold on, ma'am!"
+                }
+            ]
+        },
+        {
+            "scene_number": 2,
+            "scene_characters": [
+                1,
+                2,
+                3
+            ],
+            "scene_setting": "The same busy street, but now the bus has screeched to a halt, and the kid is crying nearby.",
+            "dialogue": [
+                {
+                    "character_number": "3",
+                    "dialog": "Waaah!"
+                },
+                {
+                    "character_number": "4",
+                    "dialog": "What's wrong, sweetie?"
+                }
+            ]
+        },
+        {
+            "scene_number": 3,
+            "scene_characters": [
+                4
+            ],
+            "scene_setting": "The same busy street, but now the kid's mother is standing near the kid, looking angry and frustrated.",
+            "dialogue": [
+                {
+                    "character_number": "4",
+                    "dialog": "Ugh, this is ridiculous!"
+                },
+                {
+                    "character_number": "4",
+                    "dialog": "Oh, wait... I know what I need to do!"
+                }
+            ]
+        },
+        {
+            "scene_number": 4,
+            "scene_characters": [
+                4
+            ],
+            "scene_setting": "The same busy street, but now the kid's mother is dancing salsa in the middle of the street.",
+            "dialogue": [
+                {
+                    "character_number": "4",
+                    "dialog": "Woo-hoo!"
+                }
+            ]
+        }
+    ]
+}

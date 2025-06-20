@@ -10,9 +10,6 @@ llm_model="meta-llama/Llama-3-8b-chat-hf"
 # import libraries
 import json
 import together
-story_prompt_path = "./prompts/storyPrompts.txt"
-screenplay_prompt_path = "./prompts/screenplayPromptTest.txt"
-
 
 def generate_screenplay(story_prompt, screenplay_prompt, together_api_key):
     
@@ -31,7 +28,7 @@ def generate_screenplay(story_prompt, screenplay_prompt, together_api_key):
     return response['output']['choices'][0]['text']
 
 #Get the story prompt from story ID story_number from the storyPrompts.txt file.
-def get_story_prompt(story_number):
+def get_story_prompt(story_number, story_prompt_path):
     with open(story_prompt_path, "r", encoding="utf-8") as f:
         content = f.read().strip()
 
@@ -46,7 +43,7 @@ def get_story_prompt(story_number):
         
     return story_prompt
 
-def get_screenplay_prompt():
+def get_screenplay_prompt(screenplay_prompt_path):
     with open(screenplay_prompt_path, "r", encoding="utf-8") as f:
         screenplay_prompt = f.read().strip()
     
