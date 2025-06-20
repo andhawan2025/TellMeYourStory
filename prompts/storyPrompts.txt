@@ -22,7 +22,7 @@
       },
       {
         "story_id": "6",
-        "story_prompt": "A man is showing off his new car to friends and family. A woman comes and makes fun of the car, saying that she has a better one. Then the man and women race in their cars."
+        "story_prompt": "A man is showing off his new car to friends and family. A woman comes and makes fun of the car, saying that she has a better one. Then the man challenges the women and they both race in their cars."
       },
       {
         "story_id": "7",

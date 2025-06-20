@@ -1,16 +1,16 @@
 <screenplay>
-    <title>Market Trip</title>
+    <title>New Car Showdown</title>
     <characters>
         <character>
             <character_number>1</character_number>
-            <character_name>Whiskers</character_name>
-            <character_gender>Female</character_gender>
+            <character_name>John</character_name>
+            <character_gender>Male</character_gender>
             <character_agegroup>Adult</character_agegroup>
         </character>
         <character>
             <character_number>2</character_number>
-            <character_name>Rufus</character_name>
-            <character_gender>Male</character_gender>
+            <character_name>Sarah</character_name>
+            <character_gender>Female</character_gender>
             <character_agegroup>Adult</character_agegroup>
         </character>
     </characters>
@@ -19,17 +19,12 @@
             <scene_number>1</scene_number>
             <scene_characters>
                 <character_number>1</character_number>
-                <character_number>2</character_number>
             </scene_characters>
-            <scene_setting>The two friends, Whiskers the cat and Rufus the dog, are walking to the market on a sunny day.</scene_setting>
+            <scene_setting>John's driveway, afternoon, John is standing next to his new car, a group of friends and family are gathered around.</scene_setting>
             <dialogue>
                 <dialogue_entry>
                     <character_number>1</character_number>
-                    <dialog>I'm so excited to go to the market!</dialog>
-                </dialogue_entry>
-                <dialogue_entry>
-                    <character_number>2</character_number>
-                    <dialog>Me too! I heard they have some great treats.</dialog>
+                    <dialog>Check out my new ride! Isn't it sweet?</dialog>
                 </dialogue_entry>
             </dialogue>
         </scene>
@@ -37,61 +32,35 @@
             <scene_number>2</scene_number>
             <scene_characters>
                 <character_number>1</character_number>
+                <character_number>2</character_number>
             </scene_characters>
-            <scene_setting>Whiskers is at the fruit stand, looking at the bananas.</scene_setting>
+            <scene_setting>John's driveway, afternoon, John is standing next to his new car, Sarah has just arrived and is looking at the car with a smirk on her face.</scene_setting>
             <dialogue>
                 <dialogue_entry>
+                    <character_number>2</character_number>
+                    <dialog>This old thing? I've got a better one.</dialog>
+                </dialogue_entry>
+                <dialogue_entry>
                     <character_number>1</character_number>
-                    <dialog>I'll take this banana, please.</dialog>
+                    <dialog>Oh yeah? Well, I challenge you to a race!</dialog>
                 </dialogue_entry>
             </dialogue>
         </scene>
         <scene>
             <scene_number>3</scene_number>
             <scene_characters>
-                <character_number>2</character_number>
-            </scene_characters>
-            <scene_setting>Rufus is at the bakery stand, looking at the muffins.</scene_setting>
-            <dialogue>
-                <dialogue_entry>
-                    <character_number>2</character_number>
-                    <dialog>I'll take this blueberry muffin, please.</dialog>
-                </dialogue_entry>
-            </dialogue>
-        </scene>
-        <scene>
-            <scene_number>4</scene_number>
-            <scene_characters>
                 <character_number>1</character_number>
                 <character_number>2</character_number>
             </scene_characters>
-            <scene_setting>The two friends are at the checkout counter, waiting to pay.</scene_setting>
+            <scene_setting>A nearby empty parking lot, afternoon, John and Sarah are standing next to their cars, ready to race.</scene_setting>
             <dialogue>
                 <dialogue_entry>
                     <character_number>1</character_number>
-                    <dialog>Thank you!</dialog>
+                    <dialog>Ready, set, go!</dialog>
                 </dialogue_entry>
                 <dialogue_entry>
                     <character_number>2</character_number>
-                    <dialog>Thank you!</dialog>
-                </dialogue_entry>
-            </dialogue>
-        </scene>
-        <scene>
-            <scene_number>5</scene_number>
-            <scene_characters>
-                <character_number>1</character_number>
-                <character_number>2</character_number>
-            </scene_characters>
-            <scene_setting>The two friends are walking home, carrying their purchases.</scene_setting>
-            <dialogue>
-                <dialogue_entry>
-                    <character_number>1</character_number>
-                    <dialog>That was a great trip!</dialog>
-                </dialogue_entry>
-                <dialogue_entry>
-                    <character_number>2</character_number>
-                    <dialog>Definitely! Let's do it again soon.</dialog>
+                    <dialog>Ha! You'll never catch me!</dialog>
                 </dialogue_entry>
             </dialogue>
         </scene>

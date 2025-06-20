@@ -1,16 +1,16 @@
 {
-    "title": "Market Trip",
+    "title": "New Car Showdown",
     "characters": [
         {
             "character_number": 1,
-            "character_name": "Whiskers",
-            "character_gender": "Female",
+            "character_name": "John",
+            "character_gender": "Male",
             "character_agegroup": "Adult"
         },
         {
             "character_number": 2,
-            "character_name": "Rufus",
-            "character_gender": "Male",
+            "character_name": "Sarah",
+            "character_gender": "Female",
             "character_agegroup": "Adult"
         }
     ],
@@ -18,80 +18,49 @@
         {
             "scene_number": 1,
             "scene_characters": [
-                1,
-                2
+                1
             ],
-            "scene_setting": "The two friends, Whiskers the cat and Rufus the dog, are walking to the market on a sunny day.",
+            "scene_setting": "John's driveway, afternoon, John is standing next to his new car, a group of friends and family are gathered around.",
             "dialogue": [
                 {
                     "character_number": "1",
-                    "dialog": "I'm so excited to go to the market!"
-                },
-                {
-                    "character_number": "2",
-                    "dialog": "Me too! I heard they have some great treats."
+                    "dialog": "Check out my new ride! Isn't it sweet?"
                 }
             ]
         },
         {
             "scene_number": 2,
             "scene_characters": [
-                1
+                1,
+                2
             ],
-            "scene_setting": "Whiskers is at the fruit stand, looking at the bananas.",
+            "scene_setting": "John's driveway, afternoon, John is standing next to his new car, Sarah has just arrived and is looking at the car with a smirk on her face.",
             "dialogue": [
                 {
+                    "character_number": "2",
+                    "dialog": "This old thing? I've got a better one."
+                },
+                {
                     "character_number": "1",
-                    "dialog": "I'll take this banana, please."
+                    "dialog": "Oh yeah? Well, I challenge you to a race!"
                 }
             ]
         },
         {
             "scene_number": 3,
             "scene_characters": [
-                2
-            ],
-            "scene_setting": "Rufus is at the bakery stand, looking at the muffins.",
-            "dialogue": [
-                {
-                    "character_number": "2",
-                    "dialog": "I'll take this blueberry muffin, please."
-                }
-            ]
-        },
-        {
-            "scene_number": 4,
-            "scene_characters": [
                 1,
                 2
             ],
-            "scene_setting": "The two friends are at the checkout counter, waiting to pay.",
+            "scene_setting": "A nearby empty parking lot, afternoon, John and Sarah are standing next to their cars, ready to race.",
             "dialogue": [
                 {
                     "character_number": "1",
-                    "dialog": "Thank you!"
+                    "dialog": "Ready, set, go!"
                 },
                 {
                     "character_number": "2",
-                    "dialog": "Thank you!"
-                }
-            ]
-        },
-        {
-            "scene_number": 5,
-            "scene_characters": [
-                1,
-                2
-            ],
-            "scene_setting": "The two friends are walking home, carrying their purchases.",
-            "dialogue": [
-                {
-                    "character_number": "1",
-                    "dialog": "That was a great trip!"
-                },
-                {
-                    "character_number": "2",
-                    "dialog": "Definitely! Let's do it again soon."
+                    "dialog": "Ha! You'll never catch me!"
                 }
             ]
         }

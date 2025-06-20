@@ -1,0 +1,99 @@
+{
+    "title": "Market Trip",
+    "characters": [
+        {
+            "character_number": 1,
+            "character_name": "Whiskers",
+            "character_gender": "Female",
+            "character_agegroup": "Adult"
+        },
+        {
+            "character_number": 2,
+            "character_name": "Rufus",
+            "character_gender": "Male",
+            "character_agegroup": "Adult"
+        }
+    ],
+    "scenes": [
+        {
+            "scene_number": 1,
+            "scene_characters": [
+                1,
+                2
+            ],
+            "scene_setting": "The two friends, Whiskers the cat and Rufus the dog, are walking to the market on a sunny day.",
+            "dialogue": [
+                {
+                    "character_number": "1",
+                    "dialog": "I'm so excited to go to the market!"
+                },
+                {
+                    "character_number": "2",
+                    "dialog": "Me too! I love trying new treats."
+                }
+            ]
+        },
+        {
+            "scene_number": 2,
+            "scene_characters": [
+                1
+            ],
+            "scene_setting": "Whiskers is standing at a fruit stand, looking at the bananas.",
+            "dialogue": [
+                {
+                    "character_number": "1",
+                    "dialog": "I'll take this banana, please."
+                }
+            ]
+        },
+        {
+            "scene_number": 3,
+            "scene_characters": [
+                2
+            ],
+            "scene_setting": "Rufus is standing at a bakery stand, looking at the muffins.",
+            "dialogue": [
+                {
+                    "character_number": "2",
+                    "dialog": "I'll take this blueberry muffin, please."
+                }
+            ]
+        },
+        {
+            "scene_number": 4,
+            "scene_characters": [
+                1,
+                2
+            ],
+            "scene_setting": "The two friends are standing at the checkout counter, waiting to pay.",
+            "dialogue": [
+                {
+                    "character_number": "1",
+                    "dialog": "Thank you!"
+                },
+                {
+                    "character_number": "2",
+                    "dialog": "Thank you!"
+                }
+            ]
+        },
+        {
+            "scene_number": 5,
+            "scene_characters": [
+                1,
+                2
+            ],
+            "scene_setting": "The two friends are walking home, carrying their purchases.",
+            "dialogue": [
+                {
+                    "character_number": "1",
+                    "dialog": "That was a great trip!"
+                },
+                {
+                    "character_number": "2",
+                    "dialog": "Definitely! Let's do it again soon."
+                }
+            ]
+        }
+    ]
+}
