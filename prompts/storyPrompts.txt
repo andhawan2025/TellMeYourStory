@@ -27,6 +27,14 @@
       {
         "story_id": "7",
         "story_prompt": "A homeless woman is sitting on Hastings street. And a person passes by and looks in her eyes and wishes a beautiful sunny morning. The homeless person smiles happily. She thanks him and says may god bless you."
+      },
+      {
+        "story_id": '8",
+        "story_prompt": "A man is watching a movie with kindergartners and their parents and they are enjoying. One kid eats a lot of popcorn and says wow the butter is so tasty. The other kid also says that she likes her vanilla ice cream. A naughty kid says i will eat 20 ice creams."
+      },
+      {
+        "story_id": "9"
+        "story_prompt": "A train is going from the mountains in Alaska with a rich businessman and his wife who are having conversation over coffee. The businessman says that the mountains look majestic. The wife says she's waiting to see the beach. The man then started crying."
       }
     ]
   }
