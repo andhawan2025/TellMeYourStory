@@ -2,6 +2,198 @@
 
 {% block title %}Your Video – Tell Me Your Story{% endblock %}
 
+{% block extra_head %}
+<script>
+// Move the screenplay functionality to head to ensure it loads early
+window.addEventListener('load', function() {
+    console.log('Window loaded, setting up buttons');
+    
+    // Screenplay elements
+    const displayScreenplayBtn = document.getElementById('displayScreenplayBtn');
+    const screenplaySection = document.getElementById('screenplaySection');
+    const closeScreenplayBtn = document.getElementById('closeScreenplayBtn');
+    const screenplayContent = document.getElementById('screenplayContent');
+
+    // Images elements
+    const displayImagesBtn = document.getElementById('displayImagesBtn');
+    const imagesSection = document.getElementById('imagesSection');
+    const closeImagesBtn = document.getElementById('closeImagesBtn');
+    const imagesContent = document.getElementById('imagesContent');
+
+    console.log('Button elements:', { displayScreenplayBtn, displayImagesBtn });
+    console.log('Section elements:', { screenplaySection, imagesSection });
+
+    // Setup screenplay functionality
+    if (displayScreenplayBtn && screenplaySection) {
+        // Toggle screenplay section
+        displayScreenplayBtn.addEventListener('click', function(e) {
+            console.log('Display Screenplay button clicked');
+            e.preventDefault();
+            
+            if (screenplaySection.classList.contains('hidden')) {
+                // Show the section
+                screenplaySection.classList.remove('hidden');
+                displayScreenplayBtn.textContent = 'Hide Screenplay';
+                displayScreenplayBtn.classList.remove('border-blue-300', 'text-blue-700', 'hover:bg-blue-50');
+                displayScreenplayBtn.classList.add('border-gray-300', 'text-gray-700', 'hover:bg-gray-50');
+                loadScreenplay();
+            } else {
+                // Hide the section
+                screenplaySection.classList.add('hidden');
+                displayScreenplayBtn.textContent = 'Display Screenplay';
+                displayScreenplayBtn.classList.remove('border-gray-300', 'text-gray-700', 'hover:bg-gray-50');
+                displayScreenplayBtn.classList.add('border-blue-300', 'text-blue-700', 'hover:bg-blue-50');
+            }
+        });
+
+        // Close screenplay section
+        closeScreenplayBtn.addEventListener('click', function() {
+            screenplaySection.classList.add('hidden');
+            displayScreenplayBtn.textContent = 'Display Screenplay';
+            displayScreenplayBtn.classList.remove('border-gray-300', 'text-gray-700', 'hover:bg-gray-50');
+            displayScreenplayBtn.classList.add('border-blue-300', 'text-blue-700', 'hover:bg-blue-50');
+        });
+    }
+
+    // Setup images functionality
+    if (displayImagesBtn && imagesSection) {
+        // Toggle images section
+        displayImagesBtn.addEventListener('click', function(e) {
+            console.log('Display Images button clicked');
+            e.preventDefault();
+            
+            if (imagesSection.classList.contains('hidden')) {
+                // Show the section
+                imagesSection.classList.remove('hidden');
+                displayImagesBtn.textContent = 'Hide Images';
+                displayImagesBtn.classList.remove('border-green-300', 'text-green-700', 'hover:bg-green-50');
+                displayImagesBtn.classList.add('border-gray-300', 'text-gray-700', 'hover:bg-gray-50');
+                loadImages();
+            } else {
+                // Hide the section
+                imagesSection.classList.add('hidden');
+                displayImagesBtn.textContent = 'Display Images';
+                displayImagesBtn.classList.remove('border-gray-300', 'text-gray-700', 'hover:bg-gray-50');
+                displayImagesBtn.classList.add('border-green-300', 'text-green-700', 'hover:bg-green-50');
+            }
+        });
+
+        // Close images section
+        closeImagesBtn.addEventListener('click', function() {
+            imagesSection.classList.add('hidden');
+            displayImagesBtn.textContent = 'Display Images';
+            displayImagesBtn.classList.remove('border-gray-300', 'text-gray-700', 'hover:bg-gray-50');
+            displayImagesBtn.classList.add('border-green-300', 'text-green-700', 'hover:bg-green-50');
+        });
+    }
+
+    // Load screenplay data
+    function loadScreenplay() {
+        console.log('Loading screenplay...');
+        fetch('/serve-screenplay')
+            .then(response => {
+                console.log('Response status:', response.status);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Screenplay data loaded:', data);
+                displayScreenplay(data);
+            })
+            .catch(error => {
+                console.error('Error loading screenplay:', error);
+                screenplayContent.innerHTML = `
+                    <div class="text-center text-red-600">
+                        <p>Error loading screenplay: ${error.message}</p>
+                        <p class="text-sm mt-2">Please check the browser console for more details.</p>
+                    </div>
+                `;
+            });
+    }
+
+    // Load images data
+    function loadImages() {
+        console.log('Loading images...');
+        fetch('/serve-images')
+            .then(response => {
+                console.log('Images response status:', response.status);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Images data loaded:', data);
+                displayImages(data);
+            })
+            .catch(error => {
+                console.error('Error loading images:', error);
+                imagesContent.innerHTML = `
+                    <div class="text-center text-red-600">
+                        <p>Error loading images: ${error.message}</p>
+                        <p class="text-sm mt-2">Please check the browser console for more details.</p>
+                    </div>
+                `;
+            });
+    }
+
+    // Display screenplay data
+    function displayScreenplay(data) {
+        // Simply display the raw JSON data as formatted text
+        const jsonString = JSON.stringify(data, null, 2);
+        screenplayContent.innerHTML = `
+            <div class="bg-gray-50 p-4 rounded-lg">
+                <pre class="text-sm text-gray-800 whitespace-pre-wrap overflow-x-auto">${jsonString}</pre>
+            </div>
+        `;
+    }
+
+    // Display images data
+    function displayImages(data) {
+        if (!data.images || data.images.length === 0) {
+            imagesContent.innerHTML = `
+                <div class="text-center text-gray-600">
+                    <p>No images found</p>
+                </div>
+            `;
+            return;
+        }
+
+        // Create a responsive grid layout
+        const gridCols = data.images.length <= 4 ? 2 : 3; // 2x2 for 4 or fewer images, 3x3 for more
+        const gridClass = `grid grid-cols-1 md:grid-cols-${gridCols} lg:grid-cols-${gridCols} gap-6`;
+        
+        const imagesHTML = data.images.map(image => `
+            <div class="bg-gray-50 rounded-lg p-4 text-center">
+                <div class="mb-3">
+                    <h3 class="text-lg font-semibold text-gray-900">Scene ${image.scene_number}</h3>
+                </div>
+                <div class="aspect-square bg-white rounded-lg overflow-hidden shadow-md">
+                    <img src="${image.url}" 
+                         alt="Scene ${image.scene_number}" 
+                         class="w-full h-full object-cover"
+                         loading="lazy"
+                         onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="hidden w-full h-full flex items-center justify-center text-gray-500">
+                        <p>Image not found</p>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-600 mt-2">${image.filename}</p>
+            </div>
+        `).join('');
+
+        imagesContent.innerHTML = `
+            <div class="${gridClass}">
+                ${imagesHTML}
+            </div>
+        `;
+    }
+});
+</script>
+{% endblock %}
+
 {% block nav %}
 <form method="POST" action="{{ url_for('reset') }}" class="inline">
     <button type="submit" class="px-4 py-2 text-gray-600 hover:text-gray-900 transition-colors">Start Over</button>
@@ -46,11 +238,6 @@
                     <a href="{{ url_for('download_video') }}" class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
                         Download Video
                     </a>
-                    <form method="POST" action="{{ url_for('force_regenerate') }}" class="inline">
-                        <button type="submit" class="px-4 py-2 border border-orange-300 rounded-lg text-orange-700 hover:bg-orange-50 transition-colors">
-                            Regenerate Video
-                        </button>
-                    </form>
                     {% endif %}
                     <form method="POST" action="{{ url_for('story') }}" class="inline">
                         <button type="submit" class="gradient-button text-white px-6 py-2 rounded-lg font-medium">Create Another Video</button>
@@ -58,15 +245,100 @@
                 </div>
 
                 {% if session.get('story') %}
-                <div class="mt-8 p-4 bg-gray-50 rounded-lg">
-                    <h3 class="text-lg font-semibold mb-2">Your Original Story</h3>
-                    <p class="text-gray-700 whitespace-pre-wrap">{{ session.get('story') }}</p>
+                <div class="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-gradient-to-r from-blue-600 to-indigo-600 px-6 py-4">
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-white mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <h3 class="text-xl font-bold text-white">Your Original Story</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="bg-white rounded-lg p-4 shadow-inner border border-blue-100">
+                            <p class="text-gray-800 whitespace-pre-wrap leading-relaxed">{{ session.get('story') }}</p>
+                        </div>
+                    </div>
                 </div>
                 {% endif %}
+
+                <!-- Review Section -->
+                <div class="mt-8 bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-xl shadow-sm overflow-hidden">
+                    <div class="bg-gradient-to-r from-purple-600 to-pink-600 px-6 py-4">
+                        <div class="flex items-center">
+                            <svg class="w-6 h-6 text-white mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                            </svg>
+                            <h3 class="text-xl font-bold text-white">Review Generated Content</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex gap-4 justify-center">
+                            <button id="displayScreenplayBtn" class="group relative px-6 py-3 border-2 border-blue-300 rounded-xl text-blue-700 hover:bg-blue-50 hover:border-blue-400 transition-all duration-200 shadow-sm hover:shadow-md">
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                    </svg>
+                                    <span class="font-medium">Display Screenplay</span>
+                                </div>
+                            </button>
+                            <button id="displayImagesBtn" class="group relative px-6 py-3 border-2 border-green-300 rounded-xl text-green-700 hover:bg-green-50 hover:border-green-400 transition-all duration-200 shadow-sm hover:shadow-md">
+                                <div class="flex items-center">
+                                    <svg class="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                    </svg>
+                                    <span class="font-medium">Display Images</span>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inline Screenplay Section -->
+                <div id="screenplaySection" class="hidden mt-8">
+                    <div class="bg-white border border-gray-200 rounded-lg shadow-lg">
+                        <div class="flex justify-between items-center p-6 border-b">
+                            <h2 class="text-2xl font-bold text-gray-900">Generated Screenplay</h2>
+                            <button id="closeScreenplayBtn" class="text-gray-400 hover:text-gray-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="p-6">
+                            <div id="screenplayContent" class="space-y-6">
+                                <div class="text-center">
+                                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto"></div>
+                                    <p class="mt-2 text-gray-600">Loading screenplay...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inline Images Section -->
+                <div id="imagesSection" class="hidden mt-8">
+                    <div class="bg-white border border-gray-200 rounded-lg shadow-lg">
+                        <div class="flex justify-between items-center p-6 border-b">
+                            <h2 class="text-2xl font-bold text-gray-900">Generated Scene Images</h2>
+                            <button id="closeImagesBtn" class="text-gray-400 hover:text-gray-600">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="p-6">
+                            <div id="imagesContent" class="space-y-6">
+                                <div class="text-center">
+                                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-green-600 mx-auto"></div>
+                                    <p class="mt-2 text-gray-600">Loading images...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
-{% endblock %}
-
-{# No scripts block (timer logic is now in generating_video.html) #} 
+{% endblock %} 

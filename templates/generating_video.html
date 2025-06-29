@@ -84,6 +84,8 @@
                 const progress = data.progress;
                 const status = data.status;
                 
+                console.log('Progress update:', { progress, status });
+                
                 progressBar.style.width = `${progress}%`;
                 progressText.textContent = `${progress}%`;
                 
@@ -111,14 +113,21 @@
                 
                 // Check for completion or error
                 if (progress >= 100 && status === 'completed') {
+                    console.log('Video generation completed, redirecting to video page');
                     // Video generation completed successfully
                     window.location.href = "{{ url_for('video') }}";
                 } else if (status && status.startsWith('Error')) {
+                    console.log('Error detected:', status);
                     // Show error message
                     errorText.textContent = status;
                     errorMessage.classList.remove('hidden');
                 } else if (progress < 100) {
+                    console.log('Continuing to poll, progress:', progress);
                     // Continue polling
+                    setTimeout(updateProgress, 2000);
+                } else {
+                    console.log('Progress is 100 but status is not completed:', status);
+                    // Progress is 100 but status is not 'completed', continue polling
                     setTimeout(updateProgress, 2000);
                 }
             })

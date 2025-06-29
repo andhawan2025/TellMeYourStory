@@ -80,6 +80,9 @@ def generate_screenplay_step(story_text, session_id):
     # Check if screenplay already exists
     if os.path.exists(screenplay_output_path):
         print(f"Screenplay already exists, skipping generation")
+        print("About to start 1-second delay...")
+        simulate_delay(session_id, delay_seconds=1, progress_increment=10)
+        print("Delay completed, setting progress to 20%")
         generation_progress[session_id] = 20
         return screenplay_output_path
     
@@ -105,7 +108,7 @@ def generate_screenplay_step(story_text, session_id):
 def parse_screenplay_step(screenplay_output_path, session_id):
     """Step 2: Parse the screenplay XML to dictionary"""
     print(f"Parsing screenplay for session {session_id}")
-    generation_progress[session_id] = 30
+    generation_progress[session_id] = 25
     
     screenplay_output_path_json = SCREENPLAY_OUTPUT_DIR + SCREENPLAY_JSON_FILENAME
     
@@ -115,9 +118,10 @@ def parse_screenplay_step(screenplay_output_path, session_id):
     # Check if parsed screenplay already exists
     if os.path.exists(screenplay_output_path_json):
         print(f"Parsed screenplay already exists, loading from file")
+        simulate_delay(session_id, delay_seconds=1, progress_increment=5)
         with open(screenplay_output_path_json, "r") as f:
             screenplay_data = json.load(f)
-        generation_progress[session_id] = 40
+        generation_progress[session_id] = 30
         return screenplay_data
     
     with open(screenplay_output_path, "r") as f:
@@ -133,25 +137,25 @@ def parse_screenplay_step(screenplay_output_path, session_id):
     with open(screenplay_output_path_json, "w") as f:
         json.dump(screenplay_data, f, indent=4)
     
-    generation_progress[session_id] = 40
+    generation_progress[session_id] = 30
     return screenplay_data
 
 def generate_image_prompts_step(scenes, characters_list, session_id):
     """Step 3: Generate image prompts for the scenes"""
     print(f"Generating image prompts for session {session_id}")
-    generation_progress[session_id] = 50
+    generation_progress[session_id] = 35
     
     image_prompts = []
     for scene in scenes:
         image_prompts.append(processScreenplay.create_scene_prompt(scene, characters_list))
     
-    generation_progress[session_id] = 60
+    generation_progress[session_id] = 40
     return image_prompts
 
 def generate_images_step(image_prompts, session_id):
     """Step 4: Generate images for the scenes using Flux"""
     print(f"Generating images for session {session_id}")
-    generation_progress[session_id] = 70
+    generation_progress[session_id] = 45
     
     # Ensure the directory exists before trying to write files
     utils.ensure_directory_exists(IMAGES_OUTPUT_DIR)
@@ -165,24 +169,28 @@ def generate_images_step(image_prompts, session_id):
         # Check if image already exists
         if os.path.exists(image_path):
             print(f"Image {i} already exists, skipping generation")
+            simulate_delay(session_id, delay_seconds=1, progress_increment=2)
             images.append(image_path)
         else:
             images.append(generateScenesImagesFlux.generate_and_download_flux_scene_image(prompt, image_path))
             print(f"Image {i} generated and saved to {image_paths[i]}")
+        
+        # Update progress for each image
+        generation_progress[session_id] = 45 + (i + 1) * (10 / len(image_prompts))
     
-    generation_progress[session_id] = 80
+    generation_progress[session_id] = 55
     return image_paths
 
 def generate_audio_step(scenes, character_list, session_id):
     """Step 5: Generate audio for all the scenes"""
     print(f"Generating audio for session {session_id}")
-    generation_progress[session_id] = 85
+    generation_progress[session_id] = 60
     
     # Ensure the directory exists before trying to write files
     utils.ensure_directory_exists(AUDIO_OUTPUT_DIR)
     
     audio_files = []
-    for scene in scenes:
+    for i, scene in enumerate(scenes):
         # Check if audio files already exist for this scene
         scene_audio_files = []
         scene_number = scene.get('scene_number', len(audio_files) + 1)
@@ -195,6 +203,7 @@ def generate_audio_step(scenes, character_list, session_id):
             if os.path.exists(audio_file_path):
                 scene_audio_files.append(audio_file_path)
                 print(f"Audio file already exists: {audio_file_path}")
+                simulate_delay(session_id, delay_seconds=1, progress_increment=1)
             else:
                 # Generate missing audio file
                 generated_audio = generateAudioElevenLabs.generate_audio_for_scene_dialogues(
@@ -204,8 +213,10 @@ def generate_audio_step(scenes, character_list, session_id):
                 break  # Break after generating all audio for this scene
         
         audio_files.append(scene_audio_files)
+        # Update progress for each scene
+        generation_progress[session_id] = 60 + (i + 1) * (5 / len(scenes))
     
-    generation_progress[session_id] = 90
+    generation_progress[session_id] = 65
     return audio_files
 
 def generate_video_prompts_step(scenes, characters_list, session_id):
@@ -219,9 +230,9 @@ def generate_video_prompts_step(scenes, characters_list, session_id):
     return video_prompts
 
 def generate_videos_step(scenes, video_prompts, image_paths, session_id):
-    """Step 7: Generate videos for each scene"""
+    """Step 7: Generate videos for each scene - This gets 40% of total time"""
     print(f"Generating videos for session {session_id}")
-    generation_progress[session_id] = 92
+    generation_progress[session_id] = 70
     
     # Ensure the directory exists before trying to write files
     utils.ensure_directory_exists(VIDEOS_OUTPUT_DIR)
@@ -233,20 +244,25 @@ def generate_videos_step(scenes, video_prompts, image_paths, session_id):
         # Check if video already exists
         if os.path.exists(video_path):
             print(f"Video {i} already exists, skipping generation")
+            # Video generation gets longer delays (40% of total time)
+            simulate_delay(session_id, delay_seconds=4, progress_increment=3)
             videos.append(video_path)
         else:
             videos.append(generateVideoFal.generate_fal_video_from_image(
                 video_prompts[i], image_paths[i], FAL_API_KEY, video_path
             ))
             print(f"Video {i}: {videos[i]}")
+        
+        # Update progress for each video - video generation gets more progress weight
+        generation_progress[session_id] = 70 + (i + 1) * (20 / len(scenes))
     
-    generation_progress[session_id] = 95
+    generation_progress[session_id] = 90
     return videos
 
 def overlay_audio_step(scenes, audio_files, session_id):
     """Step 8: Overlay audio on videos"""
     print(f"Overlaying audio for session {session_id}")
-    generation_progress[session_id] = 97
+    generation_progress[session_id] = 92
     
     # Ensure the directory exists before trying to write files
     utils.ensure_directory_exists(COMBINED_OUTPUT_DIR)
@@ -264,6 +280,7 @@ def overlay_audio_step(scenes, audio_files, session_id):
             # Check if combined video already exists
             if os.path.exists(combined_video_path):
                 print(f"Combined video {i} already exists, skipping overlay")
+                simulate_delay(session_id, delay_seconds=1, progress_increment=1)
                 videos_with_audio.append(combined_video_path)
             else:
                 videoAudioOverlay.overlay_audio_on_video(
@@ -276,14 +293,17 @@ def overlay_audio_step(scenes, audio_files, session_id):
                 videos_with_audio.append(combined_video_path)
         else:
             videos_with_audio.append(video_path)
+        
+        # Update progress for each scene
+        generation_progress[session_id] = 92 + (i + 1) * (3 / len(scenes))
     
-    generation_progress[session_id] = 98
+    generation_progress[session_id] = 95
     return videos_with_audio
 
 def combine_videos_step(videos_with_audio, session_id):
     """Step 9: Combine all videos into a single video"""
     print(f"Combining videos for session {session_id}")
-    generation_progress[session_id] = 99
+    generation_progress[session_id] = 97
     
     # Ensure the directory exists before trying to write files
     utils.ensure_directory_exists(COMBINED_OUTPUT_DIR)
@@ -293,14 +313,19 @@ def combine_videos_step(videos_with_audio, session_id):
     # Check if final combined video already exists
     if os.path.exists(combined_video_path):
         print(f"Final combined video already exists, skipping combination")
+        simulate_delay(session_id, delay_seconds=1, progress_increment=1)
         generation_progress[session_id] = 100
         generation_status[session_id] = "completed"
+        generation_results[session_id] = combined_video_path
+        print(f"Video generation completed for session {session_id}")
         return combined_video_path
     
     videoAudioOverlay.combineVideos(videos_with_audio, COMBINED_OUTPUT_DIR, COMBINED_VIDEO_FILENAME)
     
     generation_progress[session_id] = 100
     generation_status[session_id] = "completed"
+    generation_results[session_id] = combined_video_path
+    print(f"Video generation completed for session {session_id}")
     return combined_video_path
 
 def check_existing_files(session_id):
@@ -341,14 +366,8 @@ def check_existing_files(session_id):
 
 def generate_video_pipeline(story_text, session_id, force_regenerate=False):
     """Main pipeline to generate video from story"""
-    # Check if all files already exist for this session (unless force regenerate is enabled)
-    if not force_regenerate and check_existing_files(session_id):
-        print(f"All files already exist, skipping generation")
-        generation_progress[session_id] = 100
-        generation_status[session_id] = "completed"
-        final_video_path = os.path.join(COMBINED_OUTPUT_DIR, COMBINED_VIDEO_FILENAME)
-        generation_results[session_id] = final_video_path
-        return
+    # Always go through the pipeline to ensure delays are applied
+    # The individual steps will handle file existence and apply delays
     
     # Step 1: Generate screenplay
     screenplay_path = generate_screenplay_step(story_text, session_id)
@@ -398,6 +417,25 @@ def generate_video_pipeline(story_text, session_id, force_regenerate=False):
     if final_video_path:
         generation_results[session_id] = final_video_path
         # Note: session['video_generated'] will be set by the frontend when it detects completion
+
+def test_delay():
+    """Simple test to verify time.sleep is working"""
+    print("Testing delay - starting")
+    time.sleep(2)
+    print("Testing delay - 2 seconds passed")
+    time.sleep(3)
+    print("Testing delay - 5 seconds total passed")
+
+def simulate_delay(session_id, delay_seconds=2, progress_increment=1):
+    """Simulate a delay while updating progress"""
+    print(f"Starting {delay_seconds}-second delay for session {session_id}")
+    
+    # Just delay without incrementing progress to avoid going over 100%
+    for i in range(delay_seconds):
+        time.sleep(1)  # Sleep for 1 second
+        print(f"Delay step {i+1}/{delay_seconds}")
+    
+    print(f"Completed {delay_seconds}-second delay for session {session_id}")
 
 # Flask Routes
 @app.route('/')
@@ -519,6 +557,81 @@ def serve_video():
     
     return send_file(video_path, mimetype='video/mp4')
 
+@app.route('/serve-screenplay')
+def serve_screenplay():
+    """Serve the screenplay JSON data"""
+    print("serve_screenplay route called")
+    
+    # Check if we have a session and screenplay file exists
+    if 'session_id' not in session:
+        print("No session_id found")
+        return jsonify({'error': 'No active session'}), 404
+    
+    screenplay_path = SCREENPLAY_OUTPUT_DIR + SCREENPLAY_JSON_FILENAME
+    print(f"Looking for screenplay at: {screenplay_path}")
+    
+    if not os.path.exists(screenplay_path):
+        print(f"Screenplay file not found at: {screenplay_path}")
+        return jsonify({'error': 'Screenplay not found'}), 404
+    
+    try:
+        with open(screenplay_path, 'r') as f:
+            screenplay_data = json.load(f)
+        print(f"Successfully loaded screenplay data: {len(str(screenplay_data))} characters")
+        return jsonify(screenplay_data)
+    except Exception as e:
+        print(f"Error reading screenplay: {str(e)}")
+        return jsonify({'error': f'Error reading screenplay: {str(e)}'}), 500
+
+@app.route('/serve-images')
+def serve_images():
+    """Serve the list of generated images"""
+    print("serve_images route called")
+    
+    # Check if we have a session
+    if 'session_id' not in session:
+        print("No session_id found")
+        return jsonify({'error': 'No active session'}), 404
+    
+    images_dir = IMAGES_OUTPUT_DIR
+    print(f"Looking for images in: {images_dir}")
+    
+    if not os.path.exists(images_dir):
+        print(f"Images directory not found at: {images_dir}")
+        return jsonify({'error': 'Images directory not found'}), 404
+    
+    try:
+        # Get all image files from the directory
+        image_files = []
+        for filename in os.listdir(images_dir):
+            if filename.lower().endswith(('.png', '.jpg', '.jpeg', '.webp', '.gif')):
+                image_files.append({
+                    'filename': filename,
+                    'url': f'/serve-image/{filename}',
+                    'scene_number': filename.replace('image', '').replace('.webp', '').replace('.png', '').replace('.jpg', '').replace('.jpeg', '').replace('.gif', '')
+                })
+        
+        # Sort by scene number
+        image_files.sort(key=lambda x: int(x['scene_number']) if x['scene_number'].isdigit() else 0)
+        
+        print(f"Found {len(image_files)} images")
+        return jsonify({'images': image_files})
+    except Exception as e:
+        print(f"Error reading images: {str(e)}")
+        return jsonify({'error': f'Error reading images: {str(e)}'}), 500
+
+@app.route('/serve-image/<filename>')
+def serve_image(filename):
+    """Serve individual image files"""
+    if 'session_id' not in session:
+        return jsonify({'error': 'No active session'}), 404
+    
+    image_path = os.path.join(IMAGES_OUTPUT_DIR, filename)
+    if not os.path.exists(image_path):
+        return jsonify({'error': 'Image not found'}), 404
+    
+    return send_file(image_path)
+
 @app.route('/download-video')
 def download_video():
     if not session.get('video_generated', False):
@@ -540,9 +653,12 @@ def get_progress():
     progress = generation_progress.get(session_id, 0)
     status = generation_status.get(session_id, 'starting')
     
+    print(f"Progress request for session {session_id}: progress={progress}, status={status}")
+    
     # If generation is complete, set the session flag
     if progress >= 100 and status == 'completed':
         session['video_generated'] = True
+        print(f"Setting video_generated flag for session {session_id}")
     
     return jsonify({'progress': progress, 'status': status})
 
@@ -560,6 +676,13 @@ def reset():
             del generation_status[session_id]
     
     return redirect(url_for('landing'))
+
+@app.route('/test-delay')
+def test_delay_route():
+    """Test route to verify delay functionality"""
+    print("Test delay route called")
+    test_delay()
+    return jsonify({'status': 'delay test completed'})
 
 if __name__ == '__main__':
     setup_directories()
